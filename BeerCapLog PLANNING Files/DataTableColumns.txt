@@ -1,0 +1,1 @@
+CapImage | Brand | Quality | Primary | Secondary | UnderCapMessage
