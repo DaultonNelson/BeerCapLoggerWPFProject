@@ -1,0 +1,45 @@
+﻿<Window x:Class="BeerCapLog.Views.AddUserView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BeerCapLog.Views"
+        mc:Ignorable="d" FontSize="24" FontFamily="Yu Gothic Light"
+        Title="ShellView" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+
+        <ScrollViewer  Grid.Column="1" Grid.Row="1">
+            <StackPanel Orientation="Vertical">
+            
+            <TextBlock Text="Add User" FontWeight="Black" FontSize="50" FontFamily="Yu Gothic UI Semibold"/>
+
+            <TextBlock Text="First Name" FontFamily="Yu Gothic Medium"/>
+            <TextBox Margin="10"/>
+
+            <TextBlock Text="Label" FontFamily="Yu Gothic Medium"/>
+            <TextBox Margin="10"/>
+
+            <TextBlock Text="Label" FontFamily="Yu Gothic Medium"/>
+            <TextBox Margin="10"/>
+
+            <Button MinHeight="50" Width="175"
+                    Content="Add User" Margin="10"/>
+
+        </StackPanel>
+        </ScrollViewer>
+
+    </Grid>
+
+</Window>
