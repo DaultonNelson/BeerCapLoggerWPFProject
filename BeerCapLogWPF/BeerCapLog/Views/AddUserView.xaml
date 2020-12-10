@@ -16,29 +16,34 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
-        <ScrollViewer  Grid.Column="1" Grid.Row="1">
+        <TextBlock Text="Add User" FontWeight="Black" FontSize="50" FontFamily="Yu Gothic UI Semibold"
+                   Grid.Column="1" Grid.Row="1"/>
+
+        <ScrollViewer  Grid.Column="1" Grid.Row="2">
             <StackPanel Orientation="Vertical">
-            
-            <TextBlock Text="Add User" FontWeight="Black" FontSize="50" FontFamily="Yu Gothic UI Semibold"/>
 
-            <TextBlock Text="First Name" FontFamily="Yu Gothic Medium"/>
-            <TextBox Margin="10"/>
+                <TextBlock Text="First Name" FontFamily="Yu Gothic Medium"/>
+                <TextBox Margin="10"/>
 
-            <TextBlock Text="Label" FontFamily="Yu Gothic Medium"/>
-            <TextBox Margin="10"/>
+                <TextBlock Text="Last Name" FontFamily="Yu Gothic Medium"/>
+                <TextBox Margin="10"/>
 
-            <TextBlock Text="Label" FontFamily="Yu Gothic Medium"/>
-            <TextBox Margin="10"/>
+                <TextBlock Text="Date of Birth" FontFamily="Yu Gothic Medium"/>
+                <DatePicker Margin="10"/>
 
-            <Button MinHeight="50" Width="175"
+                <Button MinHeight="50" Width="175"
                     Content="Add User" Margin="10"/>
 
-        </StackPanel>
+            </StackPanel>
         </ScrollViewer>
+
+        <Image Grid.Row="1" Grid.Column="2" Grid.RowSpan="2" Source="D:\Side Projects\BottleCapCollection\BeerCapLoggerWPFProject\BeerCapImages\RiverFish.png"
+               Margin="20"/>
 
     </Grid>
 
