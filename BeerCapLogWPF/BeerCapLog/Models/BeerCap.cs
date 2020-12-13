@@ -11,6 +11,10 @@ namespace BeerCapLog.Models
     {
         #region Properties
         /// <summary>
+        /// The identification number of this Beer Cap.
+        /// </summary>
+        public int Id { get; set; }
+        /// <summary>
         /// The path to this Cap's Image.
         /// </summary>
         public string CapImagePath { get; set; }

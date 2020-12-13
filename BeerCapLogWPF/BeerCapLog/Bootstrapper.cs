@@ -18,7 +18,7 @@ namespace BeerCapLog
 
         protected override void OnStartup(object sender, StartupEventArgs e)
         {
-            DisplayRootViewFor<UserDataTableViewModel>();
+            DisplayRootViewFor<ShellViewModel>();
         }
     }
 }

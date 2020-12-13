@@ -1,4 +1,6 @@
-﻿using Caliburn.Micro;
+﻿using BeerCapLog.DataAccess;
+using BeerCapLog.Models;
+using Caliburn.Micro;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +11,32 @@ namespace BeerCapLog.ViewModels
 {
     public class ShellViewModel : Screen
     {
+        #region Variables
+        /// <summary>
+        /// The Users saved to this application.
+        /// </summary>
+        public BindableCollection<UserModel> Users { get; set; }
+
+        #region Selected User
+        private UserModel _selectedUser;
+
+        public UserModel SelectedUser
+        {
+            get { return _selectedUser; }
+            set { _selectedUser = value; }
+        } 
+        #endregion
+        #endregion
+
         public ShellViewModel()
         {
+            TestShellDataAccess tsda = new TestShellDataAccess();
+
+            List<UserModel> sortedUsersByBirth = tsda.GenerateMockUsers(11);
+            sortedUsersByBirth.Sort();
+            sortedUsersByBirth.Reverse();
+
+            Users = new BindableCollection<UserModel>(sortedUsersByBirth);
         }
     }
 }

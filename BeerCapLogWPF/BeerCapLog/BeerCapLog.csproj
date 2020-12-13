@@ -87,9 +87,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DataAccess.cs" />
+    <Compile Include="DataAccess\TestShellDataAccess.cs" />
     <Compile Include="Models\BeerCap.cs" />
     <Compile Include="Models\Brand.cs" />
+    <Compile Include="Models\UserModel.cs" />
     <Compile Include="ViewModels\AddNewCapViewModel.cs" />
     <Compile Include="ViewModels\AddUserViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />

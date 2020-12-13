@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:BeerCapLog.Views"
         mc:Ignorable="d" FontSize="24" FontFamily="Yu Gothic Light"
         Title="ShellView" Height="450" Width="800" WindowStartupLocation="CenterScreen">
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
@@ -37,9 +37,17 @@
         <TextBlock Grid.Row="2" Grid.Column="3" VerticalAlignment="Center" Margin="10"
                    Text="Create New Profile" HorizontalAlignment="Center" FontFamily="Yu Gothic Medium"/>
 
-        <ComboBox Grid.Row="3" Grid.Column="1" Margin="10">
-            Hi,
-            Yo
+        <ComboBox Grid.Row="3" Grid.Column="1" Margin="10"
+                  x:Name="Users" SelectedItem="{Binding SelectedUser}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding FullName}"/>
+                        <Rectangle Width="20"/>
+                        <TextBlock Text="{Binding ReadableBirthday}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
         </ComboBox>
 
         <Button Grid.Row="3" Grid.Column="3" Margin="10">
