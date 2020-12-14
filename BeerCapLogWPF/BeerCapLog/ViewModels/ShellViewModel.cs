@@ -30,7 +30,7 @@ namespace BeerCapLog.ViewModels
 
         public ShellViewModel()
         {
-            TestShellDataAccess tsda = new TestShellDataAccess();
+            MockUserProcessor tsda = new MockUserProcessor();
 
             List<UserModel> sortedUsersByBirth = tsda.GenerateMockUsers(11);
             sortedUsersByBirth.Sort();

@@ -87,7 +87,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DataAccess\TestShellDataAccess.cs" />
+    <Compile Include="DataAccess\BaseProcessor.cs" />
+    <Compile Include="DataAccess\CapImage.cs" />
+    <Compile Include="DataAccess\MockBeerCapProcessor.cs" />
+    <Compile Include="DataAccess\MockUserProcessor.cs" />
     <Compile Include="Models\BeerCap.cs" />
     <Compile Include="Models\Brand.cs" />
     <Compile Include="Models\UserModel.cs" />

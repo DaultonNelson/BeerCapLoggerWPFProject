@@ -5,26 +5,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public enum Quality { POOR, DAMAGED, SCUFFED, USED, MINT }
-
 namespace BeerCapLog.DataAccess
 {
-    public class TestShellDataAccess
+    public class MockUserProcessor : BaseProcessor
     {
         #region Variables
-        Random rnd = new Random();
-
-        DateTime lowEndDate = new DateTime(1943, 1, 1);
-
         string[] firstNames = new string[] { "Jim", "John", "Arin", "Sue", "Missy", "Caroline", "Tom", "Frank" };
         string[] lastNames = new string[] { "Sanderson", "Nelson", "Collins", "Apple", "Williams", "Henry", "Bo"};
-        int daysFromLowDate;
+
+        public DateTime lowEndDate = new DateTime(1943, 1, 1);
+
+        public int daysFromLowDate;
         #endregion
 
         /// <summary>
-        /// Creates a new Test Shell Data Access class instance
+        /// Creates a new Mock User Processor class instance.
         /// </summary>
-        public TestShellDataAccess()
+        public MockUserProcessor()
         {
             daysFromLowDate = (DateTime.Today - lowEndDate).Days;
         }
@@ -70,23 +67,6 @@ namespace BeerCapLog.DataAccess
             output = lowEndDate.AddDays(rnd.Next(daysFromLowDate));
 
             return output;
-        }
-
-        /// <summary>
-        /// Grabs a random item from a specified array.
-        /// </summary>
-        /// <typeparam name="T">
-        /// The Type we're looking for.
-        /// </typeparam>
-        /// <param name="data">
-        /// The array we're picking from.
-        /// </param>
-        /// <returns>
-        /// A random item from the specified array.
-        /// </returns>
-        public T GetRandomItem<T> (T[] data)
-        {
-            return data[rnd.Next(0, data.Length)];
         }
     }
 }

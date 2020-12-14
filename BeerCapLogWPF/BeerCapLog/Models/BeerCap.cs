@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BeerCapLog.Models
 {
-    public class BeerCap
+    public class BeerCap : IComparable<BeerCap>
     {
         #region Properties
         /// <summary>
@@ -40,9 +40,41 @@ namespace BeerCapLog.Models
         public string UnderCapMessage { get; set; }
         #endregion
 
-        public BeerCap()
+        /// <summary>
+        /// Creates a new Beer Cap.
+        /// </summary>
+        /// <param name="_id">The ID number of this Beer Cap</param>
+        /// <param name="_capPath">The path to this Beer Cap's Image</param>
+        /// <param name="_brand">The Brand of this Beer Cap</param>
+        /// <param name="_quality">The Quality of this Beer Cap</param>
+        /// <param name="_primary">The Primary Color of this Beer Cap</param>
+        /// <param name="_secondary">The Secondary Color of this Beer Cap</param>
+        /// <param name="_underCap">The massge displayed under this Beer Cap</param>
+        public BeerCap(int _id, string _capPath, Brand _brand, Quality _quality, Color _primary, Color _secondary, string _underCap)
         {
-            PrimaryCapColor = Color.FromName("White");
+            Id = _id;
+            CapImagePath = _capPath;
+            CapBrand = _brand;
+            CapQuality = _quality;
+            PrimaryCapColor = _primary;
+            SecondaryCapColor = _secondary;
+
+            if (_underCap == string.Empty)
+            {
+                UnderCapMessage = "[None]";
+                return;
+            }
+
+            UnderCapMessage = _underCap;
+        }
+
+        public int CompareTo(BeerCap other)
+        {
+            int output = 5;
+
+            output = Id.CompareTo(other.Id);
+
+            return output;
         }
     }
 }

@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
+public enum Quality { POOR, DAMAGED, SCUFFED, USED, MINT }
+
 namespace BeerCapLog
 {
     public class Bootstrapper : BootstrapperBase
