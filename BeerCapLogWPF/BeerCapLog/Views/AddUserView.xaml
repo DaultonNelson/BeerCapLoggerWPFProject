@@ -42,7 +42,7 @@
             </StackPanel>
         </ScrollViewer>
 
-        <Image Grid.Row="1" Grid.Column="2" Grid.RowSpan="2" Source="D:\Side Projects\BottleCapCollection\BeerCapLoggerWPFProject\BeerCapImages\RiverFish.png"
+        <Image Grid.Row="1" Grid.Column="2" Grid.RowSpan="2" x:Name="RightCapImage"
                Margin="20"/>
 
     </Grid>

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace BeerCapLog.ViewModels
 {
@@ -24,8 +25,10 @@ namespace BeerCapLog.ViewModels
         {
             get { return _selectedUser; }
             set { _selectedUser = value; }
-        } 
+        }
         #endregion
+        
+        IWindowManager manager = new WindowManager();
         #endregion
 
         public ShellViewModel()
@@ -37,6 +40,24 @@ namespace BeerCapLog.ViewModels
             sortedUsersByBirth.Reverse();
 
             Users = new BindableCollection<UserModel>(sortedUsersByBirth);
+        }
+
+        /// <summary>
+        /// The function for the Start Here button used to add a new user.
+        /// </summary>
+        public void StartNewUserHere()
+        {
+            manager.ShowWindow(new AddUserViewModel(), null, null);
+            TryClose();
+        }
+
+        /// <summary>
+        /// The function for the User Dropdown when the user selects somethign from it.
+        /// </summary>
+        public void UserPickedFromDropdown()
+        {
+            manager.ShowWindow(new UserDataTableViewModel(), null, null);
+            TryClose();
         }
     }
 }

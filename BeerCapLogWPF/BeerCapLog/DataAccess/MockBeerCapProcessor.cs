@@ -66,7 +66,7 @@ namespace BeerCapLog.DataAccess
                 output.Add(
                     new BeerCap(
                         i + 1,
-                        "CapPath",//
+                        CapImage.GetFullPathFromName(GetRandomItem<string>(CapImage.CapImageNames.ToArray())),
                         new Brand
                         (
                             i + 1,

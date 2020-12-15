@@ -9,11 +9,10 @@ namespace BeerCapLog.DataAccess
     public class BaseProcessor
     {
         #region Variables
-
         public Random rnd = new Random();
-
         #endregion
 
+        //TODO - Make this it's own thing, currently being repeated
         /// <summary>
         /// Grabs a random item from a specified array.
         /// </summary>

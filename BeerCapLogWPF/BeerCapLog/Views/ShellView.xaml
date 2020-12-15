@@ -50,7 +50,8 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
 
-        <Button Grid.Row="3" Grid.Column="3" Margin="10">
+        <Button Grid.Row="3" Grid.Column="3" Margin="10"
+                x:Name="StartNewUserHere">
             Start Here
         </Button>
 
