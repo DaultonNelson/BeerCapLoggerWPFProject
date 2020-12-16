@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
+//TODO - At start, load in Existing Users list.
 namespace BeerCapLog.ViewModels
 {
     public class ShellViewModel : Screen
@@ -47,6 +48,7 @@ namespace BeerCapLog.ViewModels
         /// </summary>
         public void StartNewUserHere()
         {
+            //TODO - Feed Existing Users list into Add User view
             manager.ShowWindow(new AddUserViewModel(), null, null);
             TryClose();
         }

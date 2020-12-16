@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BeerCapLog.DataAccess
 {
-    public class MockBeerCapProcessor : BaseProcessor
+    public class MockBeerCapProcessor
     {
         #region Variables
         Quality[] qualities = new Quality[] { Quality.DAMAGED, Quality.POOR, Quality.SCUFFED, Quality.USED, Quality.MINT };
@@ -33,6 +33,8 @@ namespace BeerCapLog.DataAccess
         };
 
         List<Color> colors = new List<Color>();
+
+        RandomPicking picking = new RandomPicking();
         #endregion
 
         /// <summary>
@@ -66,16 +68,17 @@ namespace BeerCapLog.DataAccess
                 output.Add(
                     new BeerCap(
                         i + 1,
-                        CapImage.GetFullPathFromName(GetRandomItem<string>(CapImage.CapImageNames.ToArray())),
+                        CapImage.GetFullPathFromName(
+                            picking.GetRandomItem<string>(CapImage.CapImageNames.ToArray())),
                         new Brand
                         (
                             i + 1,
-                            GetRandomItem<string>(brands)
+                            picking.GetRandomItem<string>(brands)
                         ),
-                        GetRandomItem<Quality>(qualities),
-                        GetRandomItem<Color>(colors.ToArray()),
-                        GetRandomItem<Color>(colors.ToArray()),
-                        GetRandomItem<string>(messages)
+                        picking.GetRandomItem<Quality>(qualities),
+                        picking.GetRandomItem<Color>(colors.ToArray()),
+                        picking.GetRandomItem<Color>(colors.ToArray()),
+                        picking.GetRandomItem<string>(messages)
                     )
                 );
             }

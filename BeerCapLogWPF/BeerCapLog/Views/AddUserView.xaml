@@ -28,16 +28,17 @@
             <StackPanel Orientation="Vertical">
 
                 <TextBlock Text="First Name" FontFamily="Yu Gothic Medium"/>
-                <TextBox Margin="10"/>
+                <TextBox Margin="10" x:Name="UserFirstName"/>
 
                 <TextBlock Text="Last Name" FontFamily="Yu Gothic Medium"/>
-                <TextBox Margin="10"/>
+                <TextBox Margin="10" x:Name="UserLastName"/>
 
                 <TextBlock Text="Date of Birth" FontFamily="Yu Gothic Medium"/>
-                <DatePicker Margin="10"/>
+                <DatePicker Margin="10" x:Name="UserDateOfBirth"/>
 
                 <Button MinHeight="50" Width="175"
-                    Content="Add User" Margin="10"/>
+                    Content="Add User" Margin="10"
+                    x:Name="AddUserWithFormData"/>
 
             </StackPanel>
         </ScrollViewer>

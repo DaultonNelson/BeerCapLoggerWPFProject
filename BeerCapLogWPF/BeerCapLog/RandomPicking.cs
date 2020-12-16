@@ -4,15 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BeerCapLog.DataAccess
+namespace BeerCapLog
 {
-    public class BaseProcessor
+    public class RandomPicking
     {
         #region Variables
         public Random rnd = new Random();
         #endregion
-
-        //TODO - Make this it's own thing, currently being repeated
+        
         /// <summary>
         /// Grabs a random item from a specified array.
         /// </summary>

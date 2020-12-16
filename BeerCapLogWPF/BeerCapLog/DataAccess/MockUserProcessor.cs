@@ -7,9 +7,12 @@ using System.Threading.Tasks;
 
 namespace BeerCapLog.DataAccess
 {
-    public class MockUserProcessor : BaseProcessor
+    public class MockUserProcessor
     {
         #region Variables
+        Random rnd = new Random();
+        RandomPicking picking = new RandomPicking();
+
         string[] firstNames = new string[] { "Jim", "John", "Arin", "Sue", "Missy", "Caroline", "Tom", "Frank" };
         string[] lastNames = new string[] { "Sanderson", "Nelson", "Collins", "Apple", "Williams", "Henry", "Bo"};
 
@@ -46,8 +49,8 @@ namespace BeerCapLog.DataAccess
                     new UserModel
                     (
                         i + 1,
-                        GetRandomItem<string>(firstNames),
-                        GetRandomItem<string>(lastNames),
+                        picking.GetRandomItem<string>(firstNames),
+                        picking.GetRandomItem<string>(lastNames),
                         GenerateRandomDate()
                     )
                 );

@@ -87,7 +87,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DataAccess\BaseProcessor.cs" />
+    <Compile Include="DataUtilities\SaveUtility.cs" />
+    <Compile Include="DataUtilities\UtilityFilePaths.cs" />
+    <Compile Include="RandomPicking.cs" />
     <Compile Include="DataAccess\CapImage.cs" />
     <Compile Include="DataAccess\MockBeerCapProcessor.cs" />
     <Compile Include="DataAccess\MockUserProcessor.cs" />
