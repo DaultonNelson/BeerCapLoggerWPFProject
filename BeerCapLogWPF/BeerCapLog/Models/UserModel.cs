@@ -62,7 +62,6 @@ namespace BeerCapLog.Models
         /// <param name="_firstName">The First Name of the User</param>
         /// <param name="_lastName">The Last Name of the User</param>
         /// <param name="_birthday">The Birthday of the User</param>
-        /// <param name="_joinDate">The date the User joined this app</param>
         public UserModel(int _id, string _firstName, string _lastName, DateTime _birthday)
         {
             Id = _id;
@@ -72,6 +71,23 @@ namespace BeerCapLog.Models
             DateJoined = DateTime.Now;
         }
 
+        /// <summary>
+        /// Creates a new User.
+        /// </summary>
+        /// <param name="_id">The ID of the User</param>
+        /// <param name="_firstName">The First Name of the User</param>
+        /// <param name="_lastName">The Last Name of the User</param>
+        /// <param name="_birthday">The Birthday of the User</param>
+        /// <param name="_joined">The date the User joined this app</param>
+        public UserModel(int _id, string _firstName, string _lastName, DateTime _birthday, DateTime _joined)
+        {
+            Id = _id;
+            FirstName = _firstName;
+            LastName = _lastName;
+            DateOfBirth = _birthday;
+            DateJoined = _joined;
+        }
+        
         public int CompareTo(UserModel other)
         {
             int output = 5;

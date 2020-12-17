@@ -1,4 +1,5 @@
 ﻿using BeerCapLog.DataAccess;
+using BeerCapLog.DataUtilities;
 using BeerCapLog.Models;
 using Caliburn.Micro;
 using System;
@@ -8,7 +9,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-//TODO - At start, load in Existing Users list.
 namespace BeerCapLog.ViewModels
 {
     public class ShellViewModel : Screen
@@ -28,15 +28,23 @@ namespace BeerCapLog.ViewModels
             set { _selectedUser = value; }
         }
         #endregion
-        
-        IWindowManager manager = new WindowManager();
+
+        /// <summary>
+        /// Manages the Windows for Caliburn Micro
+        /// </summary>
+        private IWindowManager manager = new WindowManager();
+        /// <summary>
+        /// A list of the Created Users sorted by their birthdays (Youngest to Oldest).
+        /// </summary>
+        private List<UserModel> sortedUsersByBirth = new List<UserModel>();
         #endregion
 
         public ShellViewModel()
         {
             MockUserProcessor tsda = new MockUserProcessor();
 
-            List<UserModel> sortedUsersByBirth = tsda.GenerateMockUsers(11);
+            //sortedUsersByBirth = tsda.GenerateMockUsers(11);
+            sortedUsersByBirth = UtilityFilePaths.UserModelsFile.FullFilePath().LoadFile().ConvertLinesIntoUsers();
             sortedUsersByBirth.Sort();
             sortedUsersByBirth.Reverse();
 
@@ -48,8 +56,7 @@ namespace BeerCapLog.ViewModels
         /// </summary>
         public void StartNewUserHere()
         {
-            //TODO - Feed Existing Users list into Add User view
-            manager.ShowWindow(new AddUserViewModel(), null, null);
+            manager.ShowWindow(new AddUserViewModel(sortedUsersByBirth), null, null);
             TryClose();
         }
 

@@ -9,6 +9,9 @@ namespace BeerCapLog.DataAccess
 {
     public static class CapImage
     {
+        /// <summary>
+        /// The path that goes to the CapImages folder.
+        /// </summary>
         public static string FolderPath {
             get
             {
@@ -55,7 +58,10 @@ namespace BeerCapLog.DataAccess
         public static string YardsBrewing { get { return "YardsBrewing"; } }
         #endregion
         
-        public static List<string> CapImageNames = new List<string>() {
+        /// <summary>
+        /// A collection of all the Cap Image names.
+        /// </summary>
+        public static string[] CapImageNames = new string[] {
             AmericanBarley, AmstellLight, AngryOrchard, Banquet, BlueMoon,
             BudLight, BudLightLime, BudweiserClassic, BudweiserModern, CoorsLight,
             CoronaExtra, CoronaLight, CoronaPremier, CSpiral, EvilGenius, EvolutionCraftBrewing,

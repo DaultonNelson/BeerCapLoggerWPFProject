@@ -87,6 +87,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DataUtilities\LoadUtility.cs" />
     <Compile Include="DataUtilities\SaveUtility.cs" />
     <Compile Include="DataUtilities\UtilityFilePaths.cs" />
     <Compile Include="RandomPicking.cs" />

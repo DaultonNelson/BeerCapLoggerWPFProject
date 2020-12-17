@@ -9,14 +9,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-//TODO - Load Existing User list into this window for saving.
 namespace BeerCapLog.ViewModels
 {
     public class AddUserViewModel : Screen
     {
         #region Variables
-        IWindowManager manager = new WindowManager();
-
+        /// <summary>
+        /// The property for the Beer Cap Image displayed on the right side of the screen.
+        /// </summary>
         public string RightCapImage { get; set; }
 
         #region UserFirstName
@@ -50,18 +50,27 @@ namespace BeerCapLog.ViewModels
         /// <summary>
         /// The date where someone is considered an adult.
         /// </summary>
-        DateTime adultDate = DateTime.Today;
+        private DateTime adultDate = DateTime.Today;
+        /// <summary>
+        /// Manages the Windows for Caliburn Micro
+        /// </summary>
+        private IWindowManager manager = new WindowManager();
+        /// <summary>
+        /// A List of Users that were loaded from the Shell View window.
+        /// </summary>
+        private List<UserModel> usersLoadedFromShell = new List<UserModel>();
         #endregion
 
-        public AddUserViewModel()
+        public AddUserViewModel(List<UserModel> shellUsers)
         {
             adultDate = adultDate.AddYears(-18);
             //MessageBox.Show(adultDate.ToShortDateString(), "Date", MessageBoxButton.OK);
+            usersLoadedFromShell = shellUsers;
 
             RandomPicking rp = new RandomPicking();
 
             RightCapImage = CapImage.GetFullPathFromName(
-                rp.GetRandomItem<string>(CapImage.CapImageNames.ToArray()));
+                rp.GetRandomItem<string>(CapImage.CapImageNames));
 
             UserDateOfBirth = DateTime.Today;
         }
@@ -75,21 +84,19 @@ namespace BeerCapLog.ViewModels
 
             if (ValidateFromData())
             {
-                //TODO - Save User to files, and ! feed that to Shell View !
-
-                List<UserModel> users = new List<UserModel>();
+                //List<UserModel> users = new List<UserModel>();
 
                 UserModel newUser = new UserModel(
-                    users.Count + 1,
+                    usersLoadedFromShell.Count,
                     UserFirstName,
                     UserLastName,
                     UserDateOfBirth
                     //TODO - Save a new List of Beer Cap to this user.
                 );
 
-                users.Add(newUser);
+                usersLoadedFromShell.Add(newUser);
 
-                users.SaveToUsersFile();
+                usersLoadedFromShell.SaveToUsersFile();
 
                 manager.ShowWindow(new ShellViewModel(), null, null);
                 TryClose();
