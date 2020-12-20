@@ -29,40 +29,57 @@
                 BorderBrush="Black" BorderThickness="1" Padding="10">
             <ScrollViewer>
                 <StackPanel Orientation="Vertical">
+                    <!--Brand Dropdown-->
                     <TextBlock Text="Brand" FontFamily="Yu Gothic Medium"/>
-                    <ComboBox Margin="10">
-                        Cap Brand 1
+                    <ComboBox Margin="10" x:Name="Brands" SelectedItem="{Binding SelectedBrand}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Name}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
                     </ComboBox>
 
+                    <!--Cap Image Dropdown-->
                     <TextBlock Text="Cap Image" FontFamily="Yu Gothic Medium"/>
-                    <ComboBox Margin="10">
-                        Cap Image 1
+                    <ComboBox Margin="10" x:Name="CapImagePaths" SelectedItem="{Binding SelectedCapPath}"
+                              Width="100" HorizontalAlignment="Left" HorizontalContentAlignment="Center">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding }" Width="50" Height="50"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
                     </ComboBox>
 
+                    <!--Qualities Dropdown-->
                     <TextBlock Text="Quality" FontFamily="Yu Gothic Medium"/>
-                    <ComboBox Margin="10">
-                        Cap Quality 1
-                    </ComboBox>
+                    <ComboBox Margin="10" x:Name="PossibleQualities" SelectedItem="{Binding SelectedQuality}"/>
 
+                    <!--Date Acquired Field-->
                     <TextBlock Text="Date Acquired" FontFamily="Yu Gothic Medium"/>
-                    <DatePicker Margin="10"/>
+                    <DatePicker Margin="10" x:Name="SelectedAquireDate"/>
 
+                    <!--Primary Color Field-->
                     <TextBlock Text="Primary Color" FontFamily="Yu Gothic Medium"/>
                     <xctk:ColorPicker Margin="10"/>
 
+                    <!--Secondary Color Field-->
                     <TextBlock Text="Secondary Color" FontFamily="Yu Gothic Medium"/>
                     <xctk:ColorPicker Margin="10"/>
 
+                    <!--Under Cap Message Field-->
                     <TextBlock Text="Under Cap Message" FontFamily="Yu Gothic Medium"/>
-                    <TextBox Margin="10"/>
+                    <TextBox Margin="10" x:Name="CreatedUnderMessage"/>
                 </StackPanel>
             </ScrollViewer>
         </Border>
 
+        <!--Create Cap Button-->
         <Button Grid.Column="1" Grid.Row="3"
                 MinHeight="50" Width="175"
                 HorizontalAlignment="Right" Margin="10"
-                Content="Create Cap"/>
+                Content="Create Cap" x:Name="TryCreateCap"/>
 
     </Grid>
 

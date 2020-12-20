@@ -10,14 +10,32 @@ namespace BeerCapLog.DataAccess
     public class MockUserProcessor
     {
         #region Variables
+        /// <summary>
+        /// An instance of the Random class.
+        /// </summary>
         Random rnd = new Random();
+        /// <summary>
+        /// An instance of my Random picking class.
+        /// </summary>
         RandomPicking picking = new RandomPicking();
 
+        /// <summary>
+        /// Mock First Names.
+        /// </summary>
         string[] firstNames = new string[] { "Jim", "John", "Arin", "Sue", "Missy", "Caroline", "Tom", "Frank" };
+        /// <summary>
+        /// Mock Last Names.
+        /// </summary>
         string[] lastNames = new string[] { "Sanderson", "Nelson", "Collins", "Apple", "Williams", "Henry", "Bo"};
 
+        /// <summary>
+        /// The lowest, earliest date possible.
+        /// </summary>
         public DateTime lowEndDate = new DateTime(1943, 1, 1);
 
+        /// <summary>
+        /// A private variable to hold how many days it's been between the low end date and now.
+        /// </summary>
         public int daysFromLowDate;
         #endregion
 

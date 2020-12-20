@@ -6,14 +6,21 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace BeerCapLog.DataAccess
 {
     public class MockBeerCapProcessor
     {
         #region Variables
-        Quality[] qualities = new Quality[] { Quality.DAMAGED, Quality.POOR, Quality.SCUFFED, Quality.USED, Quality.MINT };
+        /// <summary>
+        /// The Qualities available to us.
+        /// </summary>
+        public Quality[] qualities = new Quality[] { Quality.POOR, Quality.DAMAGED, Quality.SCUFFED, Quality.USED, Quality.MINT };
 
+        /// <summary>
+        /// Mock messages for under the cap.
+        /// </summary>
         string[] messages = new string[]
         {
             string.Empty,
@@ -23,17 +30,32 @@ namespace BeerCapLog.DataAccess
             "90/29/10..."
         };
 
-        string[] brands = new string[]
+        /// <summary>
+        /// Mock Brand Names.
+        /// </summary>
+        string[] brandNames = new string[]
         {
-            "Bud Light",
-            "Corona",
-            "Flying Fish",
-            "Blue Moon",
-            "Red's Apple Ale"
+            "Buddy Light",
+            "Coronana",
+            "Flying Fisheroo",
+            "Blue Moon Gibbus",
+            "Red's Apple Ail",
+            "Moron's Babble",
+            "The Bentley",
+            "Zebby Bebby",
+            "King's Beer",
+            "Allura",
+            "Softy"
         };
 
+        /// <summary>
+        /// All colors possible.
+        /// </summary>
         List<Color> colors = new List<Color>();
 
+        /// <summary>
+        /// An instance of my Random picker class.
+        /// </summary>
         RandomPicking picking = new RandomPicking();
         #endregion
 
@@ -59,7 +81,7 @@ namespace BeerCapLog.DataAccess
         /// <returns>
         /// A collection of mock Beer Caps.
         /// </returns>
-        public List<BeerCap> GeneratedMockBeerCaps(int beerCapAmount)
+        public List<BeerCap> GenerateMockBeerCaps(int beerCapAmount)
         {
             List<BeerCap> output = new List<BeerCap>();
 
@@ -70,11 +92,7 @@ namespace BeerCapLog.DataAccess
                         i + 1,
                         CapImage.GetFullPathFromName(
                             picking.GetRandomItem<string>(CapImage.CapImageNames.ToArray())),
-                        new Brand
-                        (
-                            i + 1,
-                            picking.GetRandomItem<string>(brands)
-                        ),
+                        GenerateMockBrand(i + 1),
                         picking.GetRandomItem<Quality>(qualities),
                         picking.GetRandomItem<Color>(colors.ToArray()),
                         picking.GetRandomItem<Color>(colors.ToArray()),
@@ -82,6 +100,31 @@ namespace BeerCapLog.DataAccess
                     )
                 );
             }
+
+            return output;
+        }
+
+        /// <summary>
+        /// Generates a Mock Brand.
+        /// </summary>
+        /// <param name="index">
+        /// The index the Brand should have.
+        /// </param>
+        /// <returns>
+        /// A fake Brand, not create by the user.
+        /// </returns>
+        public Brand GenerateMockBrand(int index)
+        {
+            Brand output = new Brand(2000, "NOT FOR USE!");
+            
+            if (index > brandNames.Length)
+            {
+                MessageBox.Show("Cannot generate Brand!  Index too large!", "Index Exception", MessageBoxButton.OK, MessageBoxImage.Error);
+                return output;
+            }
+
+            output.Id = index;
+            output.Name = brandNames[index];
 
             return output;
         }

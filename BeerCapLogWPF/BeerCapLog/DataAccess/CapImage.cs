@@ -21,7 +21,7 @@ namespace BeerCapLog.DataAccess
 
         #region Cap Image File Names
         public static string AmericanBarley { get { return "AmericanBarley"; } }
-        public static string AmstellLight { get { return "AmstellLight"; } }
+        public static string AmstelLight { get { return "AmstelLight"; } }
         public static string AngryOrchard { get { return "AngryOrchard"; } }
         public static string Banquet { get { return "Banquet"; } }
         public static string BlueMoon { get { return "BlueMoon"; } }
@@ -62,7 +62,7 @@ namespace BeerCapLog.DataAccess
         /// A collection of all the Cap Image names.
         /// </summary>
         public static string[] CapImageNames = new string[] {
-            AmericanBarley, AmstellLight, AngryOrchard, Banquet, BlueMoon,
+            AmericanBarley, AmstelLight, AngryOrchard, Banquet, BlueMoon,
             BudLight, BudLightLime, BudweiserClassic, BudweiserModern, CoorsLight,
             CoronaExtra, CoronaLight, CoronaPremier, CSpiral, EvilGenius, EvolutionCraftBrewing,
             FlyingFish, GooseIsland, HarpLager, Heineken, MichelobLite, MichelobUltra, Mikes,
