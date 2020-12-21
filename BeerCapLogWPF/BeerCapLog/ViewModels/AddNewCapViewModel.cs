@@ -7,10 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 
 namespace BeerCapLog.ViewModels
 {
-    //TODO - Cap Image Dropdown
+    //TODO - Cap Image Dropdown (Make grid or wider for content?)
     public class AddNewCapViewModel : Screen
     {
         #region Variables
@@ -63,6 +64,24 @@ namespace BeerCapLog.ViewModels
             set { _selectedAquireDate = value; }
         }
         #endregion
+        #region Selected Primary Color
+        private Color _selectedPrimaryColor;
+
+        public Color SelectedPrimaryColor
+        {
+            get { return _selectedPrimaryColor; }
+            set { _selectedPrimaryColor = value; }
+        } 
+        #endregion
+        #region Selected Secondary Color
+        private Color _selectedSecondaryColor;
+
+        public Color SelectedSecondaryColor
+        {
+            get { return _selectedSecondaryColor; }
+            set { _selectedSecondaryColor = value; }
+        } 
+        #endregion
         #region Created Under Message
         private string _createdUnderMessage;
 
@@ -77,13 +96,22 @@ namespace BeerCapLog.ViewModels
         /// Manages the Windows for Caliburn Micro.
         /// </summary>
         private IWindowManager manager = new WindowManager();
+        /// <summary>
+        /// The Beer Cap Collection associated with the currently selected User.
+        /// </summary>
+        private CapCollection<BeerCap> userCaps;
         #endregion
 
         /// <summary>
         /// Creates a new instance of the Add New Cap View Window.
         /// </summary>
-        public AddNewCapViewModel()
+        /// <param name="userCaps">
+        /// The list of Beer Caps the User has collected.
+        /// </param>
+        public AddNewCapViewModel(CapCollection<BeerCap> transferredUserCaps)
         {
+            userCaps = transferredUserCaps;
+
             //TODO - Populate Brands with Saved Brands or dummy brands.
             MockBeerCapProcessor mbcp = new MockBeerCapProcessor();
 
@@ -116,6 +144,11 @@ namespace BeerCapLog.ViewModels
             PossibleQualities = new BindableCollection<Quality>(mbcp.qualities);
 
             SelectedAquireDate = DateTime.Today;
+
+            #region Initialize Selected Colors
+            SelectedPrimaryColor = Color.FromArgb(255, 255, 255, 255);
+            SelectedSecondaryColor = Color.FromArgb(255, 255, 255, 255); 
+            #endregion
         }
 
         /// <summary>
@@ -125,7 +158,22 @@ namespace BeerCapLog.ViewModels
         {
             if (ValidateFormData())
             {
-                //Todo - Generate New Cap from Form Data
+                BeerCap newCap = new BeerCap
+                (
+                    userCaps.Count,
+                    SelectedCapPath,
+                    SelectedBrand,
+                    SelectedQuality,
+                    SelectedPrimaryColor,
+                    SelectedSecondaryColor,
+                    CreatedUnderMessage
+                );
+
+                //TODO - Save Cap
+                userCaps.Add(newCap);
+
+                userCaps.SaveCapCollectionToFile();
+
                 manager.ShowWindow(new UserDataTableViewModel(), null, null);
                 TryClose();
             }

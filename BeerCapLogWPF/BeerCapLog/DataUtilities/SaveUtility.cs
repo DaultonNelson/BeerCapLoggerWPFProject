@@ -27,5 +27,16 @@ namespace BeerCapLog.DataUtilities
 
             File.WriteAllLines(UtilityFilePaths.UserModelsFile.FullFilePath(), lines);
         }
+
+        /// <summary>
+        /// Saves a Beer Cap Collection to a .csv file.
+        /// </summary>
+        /// <param name="capCollection">
+        /// The Beer Cap Collection being saved.
+        /// </param>
+        public static void SaveCapCollectionToFile(this CapCollection<BeerCap> capCollection)
+        {
+            //TODO - Save Beer Cap Collection at index.
+        }
     }
 }

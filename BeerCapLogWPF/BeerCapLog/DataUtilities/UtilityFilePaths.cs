@@ -24,6 +24,10 @@ namespace BeerCapLog.DataUtilities
         /// The name of the UserModels list file.
         /// </summary>
         public static string UserModelsFile { get { return "UserModels.csv"; } }
+        /// <summary>
+        /// The name of the Cap Collections list file.
+        /// </summary>
+        public static string BeerCapCollectionsFile { get { return "CapCollections.csv"; } }
         #endregion
 
         /// <summary>

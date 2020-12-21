@@ -62,11 +62,11 @@
 
                     <!--Primary Color Field-->
                     <TextBlock Text="Primary Color" FontFamily="Yu Gothic Medium"/>
-                    <xctk:ColorPicker Margin="10"/>
+                    <xctk:ColorPicker Margin="10" SelectedColor="{Binding SelectedPrimaryColor}"/>
 
                     <!--Secondary Color Field-->
                     <TextBlock Text="Secondary Color" FontFamily="Yu Gothic Medium"/>
-                    <xctk:ColorPicker Margin="10"/>
+                    <xctk:ColorPicker Margin="10" SelectedColor="{Binding SelectedSecondaryColor}"/>
 
                     <!--Under Cap Message Field-->
                     <TextBlock Text="Under Cap Message" FontFamily="Yu Gothic Medium"/>

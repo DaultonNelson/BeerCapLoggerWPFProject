@@ -34,7 +34,7 @@ namespace BeerCapLog.DataUtilities
         }
 
         /// <summary>
-        /// Makes users from a collection of lines.
+        /// Makes Users from a collection of lines.
         /// </summary>
         /// <param name="lines">
         /// The lines this function tries to convert from.
@@ -62,6 +62,22 @@ namespace BeerCapLog.DataUtilities
             }
 
             return loadedUsers;
+        }
+
+        /// <summary>
+        /// Makes Cap Collections from a collection of lines.
+        /// </summary>
+        /// <param name="lines">
+        /// The lines this function tries to convert from.
+        /// </param>
+        /// <returns>
+        /// A list of Beer Cap Collections.
+        /// </returns>
+        public static List<CapCollection<BeerCap>> CovertLinesIntoCapCollections(this List<string> lines)
+        {
+            List<CapCollection<BeerCap>> loadedCollections = new List<CapCollection<BeerCap>>();
+
+            return loadedCollections;
         }
     }
 }

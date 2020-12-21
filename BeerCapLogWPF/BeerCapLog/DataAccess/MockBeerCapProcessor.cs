@@ -1,12 +1,12 @@
 ﻿using BeerCapLog.Models;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 
 namespace BeerCapLog.DataAccess
 {
@@ -49,28 +49,10 @@ namespace BeerCapLog.DataAccess
         };
 
         /// <summary>
-        /// All colors possible.
-        /// </summary>
-        List<Color> colors = new List<Color>();
-
-        /// <summary>
         /// An instance of my Random picker class.
         /// </summary>
         RandomPicking picking = new RandomPicking();
         #endregion
-
-        /// <summary>
-        /// Creates a new Mock Beer Cap Processor class instance.
-        /// </summary>
-        public MockBeerCapProcessor()
-        {
-            PropertyInfo[] propInfos = typeof(Color).GetProperties();
-
-            foreach (PropertyInfo prop in propInfos)
-            {
-                colors.Add(Color.FromName(prop.Name));
-            }
-        }
 
         /// <summary>
         /// Generates an amount of mock Beer Caps.
@@ -94,8 +76,8 @@ namespace BeerCapLog.DataAccess
                             picking.GetRandomItem<string>(CapImage.CapImageNames.ToArray())),
                         GenerateMockBrand(i + 1),
                         picking.GetRandomItem<Quality>(qualities),
-                        picking.GetRandomItem<Color>(colors.ToArray()),
-                        picking.GetRandomItem<Color>(colors.ToArray()),
+                        Color.FromArgb(255, 255, 255, 255), //TODO - Fill Primary Color with random Color
+                        Color.FromArgb(255, 255, 255, 255), //TODO - Fill Secondary Color with random Color
                         picking.GetRandomItem<string>(messages)
                     )
                 );

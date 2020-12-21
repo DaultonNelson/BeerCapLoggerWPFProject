@@ -90,6 +90,7 @@
     <Compile Include="DataUtilities\LoadUtility.cs" />
     <Compile Include="DataUtilities\SaveUtility.cs" />
     <Compile Include="DataUtilities\UtilityFilePaths.cs" />
+    <Compile Include="Models\CapCollection.cs" />
     <Compile Include="RandomPicking.cs" />
     <Compile Include="DataAccess\CapImage.cs" />
     <Compile Include="DataAccess\MockBeerCapProcessor.cs" />

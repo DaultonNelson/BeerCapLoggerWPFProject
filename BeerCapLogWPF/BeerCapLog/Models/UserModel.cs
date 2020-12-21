@@ -88,11 +88,12 @@ namespace BeerCapLog.Models
             DateJoined = _joined;
         }
         
+        //Comparing by ID
         public int CompareTo(UserModel other)
         {
             int output = 5;
 
-            output = DateOfBirth.CompareTo(other.DateOfBirth);
+            output = Id.CompareTo(other.Id);
 
             return output;
         }
