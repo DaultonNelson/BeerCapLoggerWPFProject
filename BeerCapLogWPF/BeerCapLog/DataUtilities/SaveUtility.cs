@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace BeerCapLog.DataUtilities
 {
@@ -29,14 +30,43 @@ namespace BeerCapLog.DataUtilities
         }
 
         /// <summary>
-        /// Saves a Beer Cap Collection to a .csv file.
+        /// Saves a Beer Cap Collection to a special .csv file tied to the User.
         /// </summary>
         /// <param name="capCollection">
         /// The Beer Cap Collection being saved.
         /// </param>
-        public static void SaveCapCollectionToFile(this CapCollection<BeerCap> capCollection)
+        /// <param name="collectionOwner">
+        /// The User that owns the Beer Cap Collection.
+        /// </param>
+        public static void SaveCapCollectionToFile(this List<BeerCap> capCollection, UserModel collectionOwner)
         {
-            //TODO - Save Beer Cap Collection at index.
+            List<string> lines = new List<string>();
+
+            foreach (BeerCap cap in capCollection)
+            {
+                string primaryColorString = cap.PrimaryCapColor.ToSavableColorString();
+                string secondaryColorString = cap.SecondaryCapColor.ToSavableColorString();
+
+                lines.Add($"{cap.Id},{cap.CapImagePath},{cap.CapBrand.Id},{(int)cap.CapQuality},{primaryColorString},{secondaryColorString},{cap.DateAquired.ToShortDateString()},{cap.UnderCapMessage}");
+            }
+
+            string filePath = $"{collectionOwner.Id}{collectionOwner.FirstName}{collectionOwner.LastName}{UtilityFilePaths.CapCollectionFileSuffix}".FullFilePath();
+
+            File.WriteAllLines(filePath, lines);
+        }
+
+        /// <summary>
+        /// Converts a given color to a Savable string for the application.
+        /// </summary>
+        /// <param name="colorValue">
+        /// The color being converted.
+        /// </param>
+        /// <returns>
+        /// A pipe separated string.
+        /// </returns>
+        public static string ToSavableColorString (this Color colorValue)
+        {
+            return $"{colorValue.A}|{colorValue.R}|{colorValue.G}|{colorValue.B}";
         }
     }
 }

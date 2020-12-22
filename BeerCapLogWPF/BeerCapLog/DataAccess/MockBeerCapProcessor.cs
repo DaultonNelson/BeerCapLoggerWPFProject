@@ -27,7 +27,7 @@ namespace BeerCapLog.DataAccess
             "You're Lucky",
             "Made in China",
             "Have you seen my dog on wheels?",
-            "90/29/10..."
+            "Use by 90/29/10..."
         };
 
         /// <summary>
@@ -76,8 +76,9 @@ namespace BeerCapLog.DataAccess
                             picking.GetRandomItem<string>(CapImage.CapImageNames.ToArray())),
                         GenerateMockBrand(i + 1),
                         picking.GetRandomItem<Quality>(qualities),
-                        Color.FromArgb(255, 255, 255, 255), //TODO - Fill Primary Color with random Color
-                        Color.FromArgb(255, 255, 255, 255), //TODO - Fill Secondary Color with random Color
+                        Color.FromArgb(255, (byte)picking.rnd.Next(0, 255), (byte)picking.rnd.Next(0, 255), (byte)picking.rnd.Next(0, 255)),
+                        Color.FromArgb(255, (byte)picking.rnd.Next(0, 255), (byte)picking.rnd.Next(0, 255), (byte)picking.rnd.Next(0, 255)),
+                        picking.GenerateRandomDate(), //TODO - Change to a randomly picked date.
                         picking.GetRandomItem<string>(messages)
                     )
                 );

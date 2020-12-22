@@ -11,10 +11,6 @@ namespace BeerCapLog.DataAccess
     {
         #region Variables
         /// <summary>
-        /// An instance of the Random class.
-        /// </summary>
-        Random rnd = new Random();
-        /// <summary>
         /// An instance of my Random picking class.
         /// </summary>
         RandomPicking picking = new RandomPicking();
@@ -27,25 +23,7 @@ namespace BeerCapLog.DataAccess
         /// Mock Last Names.
         /// </summary>
         string[] lastNames = new string[] { "Sanderson", "Nelson", "Collins", "Apple", "Williams", "Henry", "Bo"};
-
-        /// <summary>
-        /// The lowest, earliest date possible.
-        /// </summary>
-        public DateTime lowEndDate = new DateTime(1943, 1, 1);
-
-        /// <summary>
-        /// A private variable to hold how many days it's been between the low end date and now.
-        /// </summary>
-        public int daysFromLowDate;
         #endregion
-
-        /// <summary>
-        /// Creates a new Mock User Processor class instance.
-        /// </summary>
-        public MockUserProcessor()
-        {
-            daysFromLowDate = (DateTime.Today - lowEndDate).Days;
-        }
 
         /// <summary>
         /// Generates a List of Mock Users for us to Test.
@@ -60,6 +38,8 @@ namespace BeerCapLog.DataAccess
         {
             List<UserModel> output = new List<UserModel>();
 
+            MockBeerCapProcessor mbcp = new MockBeerCapProcessor();
+
             for (int i = 0; i < amountOfUsers; i++)
             {
                 output.Add
@@ -69,23 +49,11 @@ namespace BeerCapLog.DataAccess
                         i + 1,
                         picking.GetRandomItem<string>(firstNames),
                         picking.GetRandomItem<string>(lastNames),
-                        GenerateRandomDate()
+                        mbcp.GenerateMockBeerCaps(4),
+                        picking.GenerateRandomDate()
                     )
                 );
             }
-
-            return output;
-        }
-
-        /// <summary>
-        /// Generates a random date between Jan 1 1943, and today.
-        /// </summary>
-        /// <returns></returns>
-        private DateTime GenerateRandomDate()
-        {
-            DateTime output = new DateTime();
-
-            output = lowEndDate.AddDays(rnd.Next(daysFromLowDate));
 
             return output;
         }

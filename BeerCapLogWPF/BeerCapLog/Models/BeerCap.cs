@@ -35,6 +35,10 @@ namespace BeerCapLog.Models
         /// </summary>
         public Color SecondaryCapColor { get; set; }
         /// <summary>
+        /// The date this Cap was acquired.
+        /// </summary>
+        public DateTime DateAquired { get; set; }
+        /// <summary>
         /// The message that appears under this cap.
         /// </summary>
         public string UnderCapMessage { get; set; }
@@ -49,8 +53,9 @@ namespace BeerCapLog.Models
         /// <param name="_quality">The Quality of this Beer Cap</param>
         /// <param name="_primary">The Primary Color of this Beer Cap</param>
         /// <param name="_secondary">The Secondary Color of this Beer Cap</param>
+        /// <param name="_date">The Acquisiton Date of this Beer Cap</param>
         /// <param name="_underCap">The massge displayed under this Beer Cap</param>
-        public BeerCap(int _id, string _capPath, Brand _brand, Quality _quality, Color _primary, Color _secondary, string _underCap)
+        public BeerCap(int _id, string _capPath, Brand _brand, Quality _quality, Color _primary, Color _secondary, DateTime _date, string _underCap)
         {
             Id = _id;
             CapImagePath = _capPath;
@@ -58,8 +63,9 @@ namespace BeerCapLog.Models
             CapQuality = _quality;
             PrimaryCapColor = _primary;
             SecondaryCapColor = _secondary;
+            DateAquired = _date;
 
-            if (_underCap == string.Empty)
+            if (_underCap == string.Empty || _underCap == null)
             {
                 UnderCapMessage = "[None]";
                 return;
@@ -68,6 +74,7 @@ namespace BeerCapLog.Models
             UnderCapMessage = _underCap;
         }
 
+        //Comparing by ID
         public int CompareTo(BeerCap other)
         {
             int output = 5;

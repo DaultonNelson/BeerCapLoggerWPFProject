@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace BeerCapLog.DataUtilities
 {
@@ -51,12 +52,15 @@ namespace BeerCapLog.DataUtilities
                 string[] props = line.Split(',');
 
                 UserModel userFromString = new UserModel(
-                    int.Parse(props[0]), //id
+                    int.Parse(props[0]), //ID
                     props[1], //First Name
                     props[2], //Last Name
+                    new List<BeerCap>(), //Beer Cap Collection
                     DateTime.Parse(props[3]), //Date of Birth
                     DateTime.Parse(props[4])  //Date Joined
                 );
+
+                userFromString.GetSavedBeerCapCollection();
 
                 loadedUsers.Add(userFromString);
             }
@@ -65,19 +69,61 @@ namespace BeerCapLog.DataUtilities
         }
 
         /// <summary>
-        /// Makes Cap Collections from a collection of lines.
+        /// Gets a saved Beer Cap Collection based on the User.
         /// </summary>
-        /// <param name="lines">
-        /// The lines this function tries to convert from.
+        /// <param name="collectionOwner">
+        /// The owner of the Beer Cap collection.
+        /// </param>
+        public static void GetSavedBeerCapCollection(this UserModel collectionOwner)
+        {
+            List<BeerCap> loadedCaps = new List<BeerCap>();
+
+            List<string> lines = $"{collectionOwner.Id}{collectionOwner.FirstName}{collectionOwner.LastName}{UtilityFilePaths.CapCollectionFileSuffix}".FullFilePath().LoadFile();
+
+            foreach (string line in lines)
+            {
+                string[] props = line.Split(',');
+
+                BeerCap capFromString = new BeerCap(
+                    int.Parse(props[0]),//ID
+                    props[1], //Path
+                    new Brand(int.Parse(props[2]), "DUMMY"), //Brand TODO - Fill with a saved Brand, not a dummy one
+                    (Quality)int.Parse(props[3]), //Quality
+                    props[4].ParseIntoColor(), //Primary Color
+                    props[5].ParseIntoColor(), //Secondary Color
+                    DateTime.Parse(props[6]), //Date Acquired
+                    props[7] //Under Cap Message
+                );
+
+                loadedCaps.Add(capFromString);
+            }
+
+            collectionOwner.BeerCaps = loadedCaps;
+        }
+
+        /// <summary>
+        /// Tries and Parses a given string into a color.
+        /// </summary>
+        /// <param name="savedData">
+        /// The string that's being parsed.
         /// </param>
         /// <returns>
-        /// A list of Beer Cap Collections.
+        /// A new Color.
         /// </returns>
-        public static List<CapCollection<BeerCap>> CovertLinesIntoCapCollections(this List<string> lines)
+        public static Color ParseIntoColor(this string savedData)
         {
-            List<CapCollection<BeerCap>> loadedCollections = new List<CapCollection<BeerCap>>();
+            Color output = new Color();
 
-            return loadedCollections;
+            string[] colorProp = savedData.Split('|');
+
+            byte propA = byte.Parse(colorProp[0]);
+            byte propR = byte.Parse(colorProp[1]);
+            byte propG = byte.Parse(colorProp[2]);
+            byte propB = byte.Parse(colorProp[3]);
+
+            Color.FromArgb(propA, propR, propG, propB);
+
+            return output;
         }
     }
 }

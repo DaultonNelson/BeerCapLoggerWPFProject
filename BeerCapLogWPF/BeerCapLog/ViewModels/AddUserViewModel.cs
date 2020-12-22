@@ -90,8 +90,8 @@ namespace BeerCapLog.ViewModels
                     usersLoadedFromShell.Count,
                     UserFirstName,
                     UserLastName,
+                    new List<BeerCap>(),
                     UserDateOfBirth
-                    //TODO - Save a new List of Beer Cap to this user.
                 );
 
                 usersLoadedFromShell.Add(newUser);

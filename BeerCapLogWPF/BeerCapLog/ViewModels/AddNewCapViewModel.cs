@@ -1,4 +1,5 @@
 ﻿using BeerCapLog.DataAccess;
+using BeerCapLog.DataUtilities;
 using BeerCapLog.Models;
 using Caliburn.Micro;
 using System;
@@ -97,20 +98,24 @@ namespace BeerCapLog.ViewModels
         /// </summary>
         private IWindowManager manager = new WindowManager();
         /// <summary>
-        /// The Beer Cap Collection associated with the currently selected User.
+        /// The User adding a new Cap to their collection on this form.
         /// </summary>
-        private CapCollection<BeerCap> userCaps;
+        private UserModel user;
         #endregion
 
         /// <summary>
         /// Creates a new instance of the Add New Cap View Window.
         /// </summary>
-        /// <param name="userCaps">
-        /// The list of Beer Caps the User has collected.
+        /// <param name="userAddingCap">
+        /// The User who wants to add a new Cap to their collection.
         /// </param>
-        public AddNewCapViewModel(CapCollection<BeerCap> transferredUserCaps)
+        public AddNewCapViewModel()//(UserModel userAddingCap)
         {
-            userCaps = transferredUserCaps;
+            //NOTE: Using a Mock User with Mock Data right now.
+
+            MockUserProcessor msp = new MockUserProcessor();
+
+            user = msp.GenerateMockUsers(1).First();
 
             //TODO - Populate Brands with Saved Brands or dummy brands.
             MockBeerCapProcessor mbcp = new MockBeerCapProcessor();
@@ -160,19 +165,20 @@ namespace BeerCapLog.ViewModels
             {
                 BeerCap newCap = new BeerCap
                 (
-                    userCaps.Count,
+                    user.BeerCaps.Count,
                     SelectedCapPath,
                     SelectedBrand,
                     SelectedQuality,
                     SelectedPrimaryColor,
                     SelectedSecondaryColor,
+                    SelectedAquireDate,
                     CreatedUnderMessage
                 );
 
                 //TODO - Save Cap
-                userCaps.Add(newCap);
+                user.BeerCaps.Add(newCap);
 
-                userCaps.SaveCapCollectionToFile();
+                user.BeerCaps.SaveCapCollectionToFile(user);
 
                 manager.ShowWindow(new UserDataTableViewModel(), null, null);
                 TryClose();
@@ -204,6 +210,8 @@ namespace BeerCapLog.ViewModels
                 MessageBox.Show("You cannot have acquired your Beer Cap from the future!", "Invalid Temporal Logging", MessageBoxButton.OK, MessageBoxImage.Error);
                 output = false;
             }
+
+            //TODO - Check to make sure that the Colors have a full alpha.
 
             return output;
         }
