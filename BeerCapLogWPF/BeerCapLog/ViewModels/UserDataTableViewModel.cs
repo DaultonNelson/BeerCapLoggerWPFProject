@@ -1,4 +1,5 @@
 ﻿using BeerCapLog.DataAccess;
+using BeerCapLog.DataUtilities;
 using BeerCapLog.Models;
 using Caliburn.Micro;
 using System;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace BeerCapLog.ViewModels
 {
+    //TODO - Some way is needed to delete existing caps in collection
     public class UserDataTableViewModel : Screen
     {
         #region Variables
@@ -43,11 +45,10 @@ namespace BeerCapLog.ViewModels
             dataTableUser = userToLoadFrom;
 
             HeaderText = $"{dataTableUser.FirstName} {dataTableUser.LastName}'s Caps";
+            
+            //MockBeerCapProcessor mbcp = new MockBeerCapProcessor();
 
-            //TODO - Only filling with mock beer caps for right now.
-            MockBeerCapProcessor mbcp = new MockBeerCapProcessor();
-
-            List<BeerCap> sortedCapCollection = mbcp.GenerateMockBeerCaps(20);
+            List<BeerCap> sortedCapCollection = dataTableUser.GetSavedBeerCapCollection();
             sortedCapCollection.Sort();
 
             CollectedCaps = new BindableCollection<BeerCap>(sortedCapCollection);
@@ -58,7 +59,7 @@ namespace BeerCapLog.ViewModels
         /// </summary>
         public void AddNewCapForUser()
         {
-            manager.ShowWindow(new AddNewCapViewModel(dataTableUser), null, null);
+            manager.ShowWindow(new AddNewCapViewModel(dataTableUser, CollectedCaps.ToList()), null, null);
             TryClose();
         }
     }

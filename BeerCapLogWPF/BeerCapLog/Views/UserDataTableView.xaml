@@ -10,6 +10,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
@@ -22,12 +23,19 @@
         <TextBlock x:Name="HeaderText" FontWeight="Black" FontSize="50" FontFamily="Yu Gothic UI Semibold"
                    Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2"/>
 
-        <DataGrid AlternatingRowBackground="LightGray" Grid.Row="2" Grid.Column="1"
+        <WrapPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="2" Margin="10">
+
+            <Button Width="30" Height="30" Content="+" ToolTip="Add New Cap" x:Name="AddNewCapForUser"/>
+
+        </WrapPanel>
+        
+        <DataGrid AlternatingRowBackground="LightGray" Grid.Row="3" Grid.Column="1"
                   Margin="10" x:Name="CollectedCaps" CanUserAddRows="False" CanUserDeleteRows="False"
-                  IsReadOnly="True" AutoGenerateColumns="False" >
+                  IsReadOnly="True" AutoGenerateColumns="False">
+            
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding Path=Id}"/>
-                
+
                 <DataGridTemplateColumn Header="Cap Image">
                     <DataGridTemplateColumn.CellTemplate>
                         <ItemContainerTemplate>
@@ -35,11 +43,11 @@
                         </ItemContainerTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                
+
                 <DataGridTextColumn Header="Brand Name" Binding="{Binding Path=CapBrandName}"/>
-                
+
                 <DataGridTextColumn Header="Quality" Binding="{Binding Path=CapQuality}"/>
-                
+
                 <DataGridTemplateColumn Header="Primary Color" MinWidth="150">
                     <DataGridTemplateColumn.CellTemplate>
                         <ItemContainerTemplate>
@@ -47,7 +55,7 @@
                         </ItemContainerTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                
+
                 <DataGridTemplateColumn Header="Secondary Color" MinWidth="150">
                     <DataGridTemplateColumn.CellTemplate>
                         <ItemContainerTemplate>
@@ -55,7 +63,7 @@
                         </ItemContainerTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                
+
                 <DataGridTemplateColumn Header="Date Acquired">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -63,9 +71,10 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                
+
                 <DataGridTextColumn Header="Under Cap Message" Binding="{Binding Path=UnderCapMessage}"/>
             </DataGrid.Columns>
+            
         </DataGrid>
     </Grid>
 </Window>

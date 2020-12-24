@@ -38,7 +38,7 @@
         <TextBlock Grid.Row="2" Grid.Column="3" VerticalAlignment="Center" Margin="10"
                    Text="Create New Profile" HorizontalAlignment="Center" FontFamily="Yu Gothic Medium"/>
 
-        <ComboBox Grid.Row="3" Grid.Column="1" Margin="10"
+        <ComboBox Grid.Row="3" Grid.Column="1" Margin="10" ToolTip="Pick an Existing User"
                   x:Name="Users" SelectedItem="{Binding SelectedUser}"
                   cal:Message.Attach="[Event SelectionChanged] = [Action UserPickedFromDropdown]">
             <ComboBox.ItemTemplate>
@@ -52,7 +52,7 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
 
-        <Button Grid.Row="3" Grid.Column="3" Margin="10"
+        <Button Grid.Row="3" Grid.Column="3" Margin="10" ToolTip="Create a New User Profile"
                 x:Name="StartNewUserHere">
             Start Here
         </Button>

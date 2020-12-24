@@ -101,6 +101,10 @@ namespace BeerCapLog.ViewModels
         /// The User adding a new Cap to their collection on this form.
         /// </summary>
         private UserModel user;
+        /// <summary>
+        /// The User's existing Beer Cap Collection.
+        /// </summary>
+        private List<BeerCap> userCollection = new List<BeerCap>();
         #endregion
 
         /// <summary>
@@ -109,15 +113,16 @@ namespace BeerCapLog.ViewModels
         /// <param name="userAddingCap">
         /// The User who wants to add a new Cap to their collection.
         /// </param>
-        public AddNewCapViewModel (UserModel userAddingCap)
+        /// <param name="usersBeerCapCollection">
+        /// The User's Beer Cap collection.
+        /// </param>
+        public AddNewCapViewModel (UserModel userAddingCap, List<BeerCap> usersBeerCapCollection)
         {
-            //NOTE: Using a Mock User with Mock Data right now.
-
             //MockUserProcessor msp = new MockUserProcessor();
 
             user = userAddingCap;
-
-            //TODO - Currently populating brands with dummy options, need real options for application
+            userCollection = usersBeerCapCollection;
+            
             MockBeerCapProcessor mbcp = new MockBeerCapProcessor();
             
             BrandNames = new BindableCollection<string>(mbcp.brandNames);
@@ -154,7 +159,7 @@ namespace BeerCapLog.ViewModels
             {
                 BeerCap newCap = new BeerCap
                 (
-                    user.BeerCaps.Count,
+                    userCollection.Count + 1,
                     SelectedCapPath,
                     SelectedBrandName,
                     SelectedQuality,
@@ -164,13 +169,18 @@ namespace BeerCapLog.ViewModels
                     CreatedUnderMessage
                 );
 
-                user.BeerCaps.Add(newCap);
+                userCollection.Add(newCap);
 
-                user.BeerCaps.SaveCapCollectionToFile(user);
+                userCollection.SaveCapCollectionToFile(user);
 
                 manager.ShowWindow(new UserDataTableViewModel(user), null, null);
                 TryClose();
             }
+        }
+
+        public void BackToDataTable()
+        {
+            //TODO - Flesh this function out more.
         }
 
         /// <summary>

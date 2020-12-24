@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+//TODO - Maybe delete this whole class
 namespace BeerCapLog.DataAccess
 {
     public class MockUserProcessor
@@ -49,7 +50,6 @@ namespace BeerCapLog.DataAccess
                         i + 1,
                         picking.GetRandomItem<string>(firstNames),
                         picking.GetRandomItem<string>(lastNames),
-                        mbcp.GenerateMockBeerCaps(4),
                         picking.GenerateRandomDate()
                     )
                 );

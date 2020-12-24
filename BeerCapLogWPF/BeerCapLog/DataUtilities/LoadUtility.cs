@@ -55,7 +55,6 @@ namespace BeerCapLog.DataUtilities
                     int.Parse(props[0]), //ID
                     props[1], //First Name
                     props[2], //Last Name
-                    new List<BeerCap>(), //Beer Cap Collection
                     DateTime.Parse(props[3]), //Date of Birth
                     DateTime.Parse(props[4])  //Date Joined
                 );
@@ -74,7 +73,10 @@ namespace BeerCapLog.DataUtilities
         /// <param name="collectionOwner">
         /// The owner of the Beer Cap collection.
         /// </param>
-        public static void GetSavedBeerCapCollection(this UserModel collectionOwner)
+        /// <returns>
+        /// The User's Beer Cap collection.
+        /// </returns>
+        public static List<BeerCap> GetSavedBeerCapCollection(this UserModel collectionOwner)
         {
             List<BeerCap> loadedCaps = new List<BeerCap>();
 
@@ -98,7 +100,7 @@ namespace BeerCapLog.DataUtilities
                 loadedCaps.Add(capFromString);
             }
 
-            collectionOwner.BeerCaps = loadedCaps;
+            return loadedCaps;
         }
 
         /// <summary>
@@ -121,7 +123,7 @@ namespace BeerCapLog.DataUtilities
             byte propG = byte.Parse(colorProp[2]);
             byte propB = byte.Parse(colorProp[3]);
 
-            Color.FromArgb(propA, propR, propG, propB);
+            output = Color.FromArgb(propA, propR, propG, propB);
 
             return output;
         }

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 
+//TODO - Maybe delete this whole class
 namespace BeerCapLog.DataAccess
 {
     public class MockBeerCapProcessor

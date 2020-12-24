@@ -18,6 +18,7 @@
             <RowDefinition Height="20"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
@@ -28,23 +29,27 @@
             <StackPanel Orientation="Vertical">
 
                 <TextBlock Text="First Name" FontFamily="Yu Gothic Medium"/>
-                <TextBox Margin="10" x:Name="UserFirstName"/>
+                <TextBox Margin="10" x:Name="UserFirstName" ToolTip="Enter First Name"/>
 
                 <TextBlock Text="Last Name" FontFamily="Yu Gothic Medium"/>
-                <TextBox Margin="10" x:Name="UserLastName"/>
+                <TextBox Margin="10" x:Name="UserLastName" ToolTip="Enter Last Name"/>
 
                 <TextBlock Text="Date of Birth" FontFamily="Yu Gothic Medium"/>
-                <DatePicker Margin="10" x:Name="UserDateOfBirth"/>
+                <DatePicker Margin="10" x:Name="UserDateOfBirth" ToolTip="Enter Birthday"/>
 
                 <Button MinHeight="50" Width="175"
                     Content="Add User" Margin="10"
-                    x:Name="AddUserWithFormData"/>
+                    x:Name="AddUserWithFormData" ToolTip="Add User"/>
 
             </StackPanel>
         </ScrollViewer>
 
         <Image Grid.Row="1" Grid.Column="2" Grid.RowSpan="2" x:Name="RightCapImage"
                Margin="20"/>
+
+        <Button Grid.Row="3" Grid.Column="1" Width="50" Height="30"
+                Content="←" Margin="10" HorizontalAlignment="Left"
+                ToolTip="Go Back" x:Name="BackToShell"/>
 
     </Grid>
 

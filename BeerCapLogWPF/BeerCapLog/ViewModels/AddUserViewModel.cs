@@ -90,7 +90,6 @@ namespace BeerCapLog.ViewModels
                     usersLoadedFromShell.Count + 1,
                     UserFirstName,
                     UserLastName,
-                    new List<BeerCap>(),
                     UserDateOfBirth
                 );
 
@@ -103,6 +102,11 @@ namespace BeerCapLog.ViewModels
             }
         }
 
+        public void BackToShell()
+        {
+            //TODO - Flesh this function out.
+        }
+
         /// <summary>
         /// Validates the Add User form data.
         /// </summary>
@@ -113,7 +117,7 @@ namespace BeerCapLog.ViewModels
         {
             bool output = true;
 
-            if (UserFirstName == string.Empty || UserLastName == null)
+            if (UserFirstName == string.Empty || UserFirstName == null)
             {
                 MessageBox.Show("First Name must have a value.", "Empty Data Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 output = false;
