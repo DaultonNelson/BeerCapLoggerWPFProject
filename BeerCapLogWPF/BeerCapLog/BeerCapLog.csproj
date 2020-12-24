@@ -95,7 +95,6 @@
     <Compile Include="DataAccess\MockBeerCapProcessor.cs" />
     <Compile Include="DataAccess\MockUserProcessor.cs" />
     <Compile Include="Models\BeerCap.cs" />
-    <Compile Include="Models\Brand.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="ViewModels\AddNewCapViewModel.cs" />
     <Compile Include="ViewModels\AddUserViewModel.cs" />

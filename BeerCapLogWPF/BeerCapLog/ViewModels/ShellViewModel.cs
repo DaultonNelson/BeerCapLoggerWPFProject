@@ -65,7 +65,7 @@ namespace BeerCapLog.ViewModels
         /// </summary>
         public void UserPickedFromDropdown()
         {
-            manager.ShowWindow(new UserDataTableViewModel(), null, null);
+            manager.ShowWindow(new UserDataTableViewModel(SelectedUser), null, null);
             TryClose();
         }
     }

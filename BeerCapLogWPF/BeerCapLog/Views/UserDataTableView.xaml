@@ -4,8 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BeerCapLog.Views"
-        mc:Ignorable="d"
-        Title="UserDataTableView" Height="450" Width="800">
+        mc:Ignorable="d" FontSize="20" FontFamily="Yu Gothic Light"
+        Title="ShellView" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
@@ -19,18 +19,52 @@
             <ColumnDefinition Width="20"/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock Text="[User]'s Caps" FontWeight="Black" FontSize="50" FontFamily="Yu Gothic UI Semibold"
+        <TextBlock x:Name="HeaderText" FontWeight="Black" FontSize="50" FontFamily="Yu Gothic UI Semibold"
                    Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2"/>
 
         <DataGrid AlternatingRowBackground="LightGray" Grid.Row="2" Grid.Column="1"
-                  Margin="10">
+                  Margin="10" x:Name="CollectedCaps" CanUserAddRows="False" CanUserDeleteRows="False"
+                  IsReadOnly="True" AutoGenerateColumns="False" >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Test Column 1"/>
-                <DataGridTextColumn Header="Test Column 2"/>
-                <DataGridTextColumn Header="Test Column 3"/>
-                <DataGridTextColumn Header="Test Column 4"/>
-                <DataGridTextColumn Header="Test Column 5"/>
-                <DataGridTextColumn Header="Test Column 6"/>
+                <DataGridTextColumn Header="ID" Binding="{Binding Path=Id}"/>
+                
+                <DataGridTemplateColumn Header="Cap Image">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <ItemContainerTemplate>
+                            <Image Source="{Binding Path=CapImagePath}" MaxHeight="50" MaxWidth="50"/>
+                        </ItemContainerTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                
+                <DataGridTextColumn Header="Brand Name" Binding="{Binding Path=CapBrandName}"/>
+                
+                <DataGridTextColumn Header="Quality" Binding="{Binding Path=CapQuality}"/>
+                
+                <DataGridTemplateColumn Header="Primary Color" MinWidth="150">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <ItemContainerTemplate>
+                            <Rectangle MaxHeight="50" MaxWidth="150" Fill="{Binding Path=PrimaryColorString}" />
+                        </ItemContainerTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                
+                <DataGridTemplateColumn Header="Secondary Color" MinWidth="150">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <ItemContainerTemplate>
+                            <Rectangle MaxHeight="50" MaxWidth="150" Fill="{Binding Path=SecondaryColorString}" />
+                        </ItemContainerTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                
+                <DataGridTemplateColumn Header="Date Acquired">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=DateAquired, StringFormat=d}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                
+                <DataGridTextColumn Header="Under Cap Message" Binding="{Binding Path=UnderCapMessage}"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

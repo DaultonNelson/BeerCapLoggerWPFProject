@@ -23,5 +23,10 @@ namespace BeerCapLog.Views
         {
             InitializeComponent();
         }
+
+        private void PossibleQualities_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BeerCapLog.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -42,6 +43,20 @@ namespace BeerCapLog.DataUtilities
         public static string FullFilePath(this string file)
         {
             return $"{FolderPath}{file}";
+        }
+
+        /// <summary>
+        /// Generates a file name based on given User information for saving their cap collection.
+        /// </summary>
+        /// <param name="user">
+        /// The user this function pulls information from.
+        /// </param>
+        /// <returns>
+        /// A unique cap collection file name for the user.
+        /// </returns>
+        public static string CapCollectonFileName (this UserModel user)
+        {
+            return $"{user.Id}{user.FirstName}{user.LastName}{CapCollectionFileSuffix}";
         }
     }
 }

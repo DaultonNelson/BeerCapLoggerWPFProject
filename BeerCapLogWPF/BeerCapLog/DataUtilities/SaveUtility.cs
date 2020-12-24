@@ -47,12 +47,10 @@ namespace BeerCapLog.DataUtilities
                 string primaryColorString = cap.PrimaryCapColor.ToSavableColorString();
                 string secondaryColorString = cap.SecondaryCapColor.ToSavableColorString();
 
-                lines.Add($"{cap.Id},{cap.CapImagePath},{cap.CapBrand.Id},{(int)cap.CapQuality},{primaryColorString},{secondaryColorString},{cap.DateAquired.ToShortDateString()},{cap.UnderCapMessage}");
+                lines.Add($"{cap.Id},{cap.CapImagePath},{cap.CapBrandName},{(int)cap.CapQuality},{primaryColorString},{secondaryColorString},{cap.DateAquired.ToShortDateString()},{cap.UnderCapMessage}");
             }
 
-            string filePath = $"{collectionOwner.Id}{collectionOwner.FirstName}{collectionOwner.LastName}{UtilityFilePaths.CapCollectionFileSuffix}".FullFilePath();
-
-            File.WriteAllLines(filePath, lines);
+            File.WriteAllLines(collectionOwner.CapCollectonFileName().FullFilePath(), lines);
         }
 
         /// <summary>

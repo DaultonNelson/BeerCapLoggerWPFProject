@@ -87,7 +87,7 @@ namespace BeerCapLog.ViewModels
                 //List<UserModel> users = new List<UserModel>();
 
                 UserModel newUser = new UserModel(
-                    usersLoadedFromShell.Count,
+                    usersLoadedFromShell.Count + 1,
                     UserFirstName,
                     UserLastName,
                     new List<BeerCap>(),

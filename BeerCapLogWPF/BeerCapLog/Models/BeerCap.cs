@@ -19,9 +19,9 @@ namespace BeerCapLog.Models
         /// </summary>
         public string CapImagePath { get; set; }
         /// <summary>
-        /// The brand this Cap belongs to.
+        /// The brand name associated with this.
         /// </summary>
-        public Brand CapBrand { get; set; }
+        public string CapBrandName { get; set; }
         /// <summary>
         /// The condition this cap is in.
         /// </summary>
@@ -42,6 +42,15 @@ namespace BeerCapLog.Models
         /// The message that appears under this cap.
         /// </summary>
         public string UnderCapMessage { get; set; }
+
+        /// <summary>
+        /// The Primary Color converted to a string.
+        /// </summary>
+        public string PrimaryColorString { get { return PrimaryCapColor.ToString(); } }
+        /// <summary>
+        /// The Secondary Color converted to a string.
+        /// </summary>
+        public string SecondaryColorString { get { return SecondaryCapColor.ToString(); } }
         #endregion
 
         /// <summary>
@@ -49,17 +58,17 @@ namespace BeerCapLog.Models
         /// </summary>
         /// <param name="_id">The ID number of this Beer Cap</param>
         /// <param name="_capPath">The path to this Beer Cap's Image</param>
-        /// <param name="_brand">The Brand of this Beer Cap</param>
+        /// <param name="_brandName">The Brand of this Beer Cap</param>
         /// <param name="_quality">The Quality of this Beer Cap</param>
         /// <param name="_primary">The Primary Color of this Beer Cap</param>
         /// <param name="_secondary">The Secondary Color of this Beer Cap</param>
         /// <param name="_date">The Acquisiton Date of this Beer Cap</param>
         /// <param name="_underCap">The massge displayed under this Beer Cap</param>
-        public BeerCap(int _id, string _capPath, Brand _brand, Quality _quality, Color _primary, Color _secondary, DateTime _date, string _underCap)
+        public BeerCap(int _id, string _capPath, string _brandName, Quality _quality, Color _primary, Color _secondary, DateTime _date, string _underCap)
         {
             Id = _id;
             CapImagePath = _capPath;
-            CapBrand = _brand;
+            CapBrandName = _brandName;
             CapQuality = _quality;
             PrimaryCapColor = _primary;
             SecondaryCapColor = _secondary;

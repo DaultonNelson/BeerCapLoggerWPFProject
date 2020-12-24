@@ -19,6 +19,20 @@ namespace BeerCapLog.DataAccess
         public Quality[] qualities = new Quality[] { Quality.POOR, Quality.DAMAGED, Quality.SCUFFED, Quality.USED, Quality.MINT };
 
         /// <summary>
+        /// Brand Names.
+        /// </summary>
+        public string[] brandNames = new string[]
+        {
+            "American Barley", "Amstell Light", "Angry Orchard",
+            "Banquet", "Blue Moon", "Bud Light", "Bud Light Lime", "Budweiser Classic", "Budweiser Modern",
+            "Coors Light", "Corona Extra", "Corona Light", "Corona Premier", "C Spiral",
+            "Evil Genius", "Evolution Craft Brewing", "Flying Fish", "Goose Island", "Harp Lager",
+            "Heineken", "Michelob Lite", "Mike's", "Moosehead Brewery", "New Belgium Brewing",
+            "Red Apple Ale", "Red Apple Ale Blue", "Red Apple Ale Special", "River Fish",
+            "Rolling Rock", "Samuel Adams", "Smirnoff", "Sun", "Twisted Tea", "Victory Brewing", "Yards Brewing"
+        };
+
+        /// <summary>
         /// Mock messages for under the cap.
         /// </summary>
         string[] messages = new string[]
@@ -28,24 +42,6 @@ namespace BeerCapLog.DataAccess
             "Made in China",
             "Have you seen my dog on wheels?",
             "Use by 90/29/10..."
-        };
-
-        /// <summary>
-        /// Mock Brand Names.
-        /// </summary>
-        string[] brandNames = new string[]
-        {
-            "Buddy Light",
-            "Coronana",
-            "Flying Fisheroo",
-            "Blue Moon Gibbus",
-            "Red's Apple Ail",
-            "Moron's Babble",
-            "The Bentley",
-            "Zebby Bebby",
-            "King's Beer",
-            "Allura",
-            "Softy"
         };
 
         /// <summary>
@@ -74,40 +70,15 @@ namespace BeerCapLog.DataAccess
                         i + 1,
                         CapImage.GetFullPathFromName(
                             picking.GetRandomItem<string>(CapImage.CapImageNames.ToArray())),
-                        GenerateMockBrand(i + 1),
+                        picking.GetRandomItem<string>(brandNames),
                         picking.GetRandomItem<Quality>(qualities),
                         Color.FromArgb(255, (byte)picking.rnd.Next(0, 255), (byte)picking.rnd.Next(0, 255), (byte)picking.rnd.Next(0, 255)),
                         Color.FromArgb(255, (byte)picking.rnd.Next(0, 255), (byte)picking.rnd.Next(0, 255), (byte)picking.rnd.Next(0, 255)),
-                        picking.GenerateRandomDate(), //TODO - Change to a randomly picked date.
+                        picking.GenerateRandomDate(),
                         picking.GetRandomItem<string>(messages)
                     )
                 );
             }
-
-            return output;
-        }
-
-        /// <summary>
-        /// Generates a Mock Brand.
-        /// </summary>
-        /// <param name="index">
-        /// The index the Brand should have.
-        /// </param>
-        /// <returns>
-        /// A fake Brand, not create by the user.
-        /// </returns>
-        public Brand GenerateMockBrand(int index)
-        {
-            Brand output = new Brand(2000, "NOT FOR USE!");
-            
-            if (index > brandNames.Length)
-            {
-                MessageBox.Show("Cannot generate Brand!  Index too large!", "Index Exception", MessageBoxButton.OK, MessageBoxImage.Error);
-                return output;
-            }
-
-            output.Id = index;
-            output.Name = brandNames[index];
 
             return output;
         }

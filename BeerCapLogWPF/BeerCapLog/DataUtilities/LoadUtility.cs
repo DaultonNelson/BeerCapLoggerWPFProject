@@ -78,7 +78,7 @@ namespace BeerCapLog.DataUtilities
         {
             List<BeerCap> loadedCaps = new List<BeerCap>();
 
-            List<string> lines = $"{collectionOwner.Id}{collectionOwner.FirstName}{collectionOwner.LastName}{UtilityFilePaths.CapCollectionFileSuffix}".FullFilePath().LoadFile();
+            List<string> lines = collectionOwner.CapCollectonFileName().FullFilePath().LoadFile();
 
             foreach (string line in lines)
             {
@@ -87,7 +87,7 @@ namespace BeerCapLog.DataUtilities
                 BeerCap capFromString = new BeerCap(
                     int.Parse(props[0]),//ID
                     props[1], //Path
-                    new Brand(int.Parse(props[2]), "DUMMY"), //Brand TODO - Fill with a saved Brand, not a dummy one
+                    props[2], //Brand Name
                     (Quality)int.Parse(props[3]), //Quality
                     props[4].ParseIntoColor(), //Primary Color
                     props[5].ParseIntoColor(), //Secondary Color
