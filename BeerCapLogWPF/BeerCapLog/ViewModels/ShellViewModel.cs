@@ -45,6 +45,12 @@ namespace BeerCapLog.ViewModels
 
             //sortedUsersByBirth = tsda.GenerateMockUsers(11);
             sortedUsersByBirth = UtilityFilePaths.UserModelsFile.FullFilePath().LoadFile().ConvertLinesIntoUsers();
+
+            if (sortedUsersByBirth.Count <= 0)
+            {
+                MessageBox.Show("No existing Users found!  Please make a new one.", "Null Reference Exception", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
             sortedUsersByBirth.Sort();
             sortedUsersByBirth.Reverse();
 
@@ -65,6 +71,9 @@ namespace BeerCapLog.ViewModels
         /// </summary>
         public void UserPickedFromDropdown()
         {
+            SelectedUser.TimeLastLoggedIn = DateTime.Now;
+            Users.ToList().SaveToUsersFile();
+
             manager.ShowWindow(new UserDataTableViewModel(SelectedUser), null, null);
             TryClose();
         }

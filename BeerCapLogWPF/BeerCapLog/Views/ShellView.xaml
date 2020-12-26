@@ -46,7 +46,7 @@
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{Binding FullName}"/>
                         <Rectangle Width="20"/>
-                        <TextBlock Text="{Binding ReadableBirthday}"/>
+                        <TextBlock Text="{Binding TimeLastLoggedIn}" FontSize="16" Foreground="Gray"/>
                     </StackPanel>
                 </DataTemplate>
             </ComboBox.ItemTemplate>

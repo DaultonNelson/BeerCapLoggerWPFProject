@@ -90,21 +90,25 @@ namespace BeerCapLog.ViewModels
                     usersLoadedFromShell.Count + 1,
                     UserFirstName,
                     UserLastName,
-                    UserDateOfBirth
+                    UserDateOfBirth,
+                    DateTime.Now
                 );
 
                 usersLoadedFromShell.Add(newUser);
 
                 usersLoadedFromShell.SaveToUsersFile();
 
-                manager.ShowWindow(new ShellViewModel(), null, null);
-                TryClose();
+                BackToShell();
             }
         }
 
+        /// <summary>
+        /// Takes the User back to the Shell View.
+        /// </summary>
         public void BackToShell()
         {
-            //TODO - Flesh this function out.
+            manager.ShowWindow(new ShellViewModel(), null, null);
+            TryClose();
         }
 
         /// <summary>

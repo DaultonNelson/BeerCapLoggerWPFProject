@@ -27,6 +27,10 @@ namespace BeerCapLog.Models
         /// </summary>
         public DateTime DateOfBirth { get; set; }
         /// <summary>
+        /// The time this User last logged in.
+        /// </summary>
+        public DateTime TimeLastLoggedIn { get; set; }
+        /// <summary>
         /// The date this User joined the Program.
         /// </summary>
         public DateTime DateJoined { get; set; }
@@ -59,13 +63,15 @@ namespace BeerCapLog.Models
         /// <param name="_firstName">The First Name of the User</param>
         /// <param name="_lastName">The Last Name of the User</param>
         /// <param name="_birthday">The Birthday of the User</param>
-        public UserModel(int _id, string _firstName, string _lastName, DateTime _birthday)
+        /// <param name="_lastLogin">The time the User last logged in</param>
+        public UserModel(int _id, string _firstName, string _lastName, DateTime _birthday, DateTime _lastLogin)
         {
             Id = _id;
             FirstName = _firstName;
             LastName = _lastName;
             DateOfBirth = _birthday;
             DateJoined = DateTime.Now;
+            TimeLastLoggedIn = _lastLogin;
         }
 
         /// <summary>
@@ -75,22 +81,24 @@ namespace BeerCapLog.Models
         /// <param name="_firstName">The First Name of the User</param>
         /// <param name="_lastName">The Last Name of the User</param>
         /// <param name="_birthday">The Birthday of the User</param>
+        /// <param name="_lastLogin">The time the User last logged in</param>
         /// <param name="_joined">The date the User joined this app</param>
-        public UserModel(int _id, string _firstName, string _lastName, DateTime _birthday, DateTime _joined)
+        public UserModel(int _id, string _firstName, string _lastName, DateTime _birthday, DateTime _lastLogin, DateTime _joined)
         {
             Id = _id;
             FirstName = _firstName;
             LastName = _lastName;
             DateOfBirth = _birthday;
             DateJoined = _joined;
+            TimeLastLoggedIn = _lastLogin;
         }
         
-        //Comparing by ID
+        //Comparing by Time last joined
         public int CompareTo(UserModel other)
         {
             int output = 5;
 
-            output = Id.CompareTo(other.Id);
+            output = TimeLastLoggedIn.CompareTo(other.TimeLastLoggedIn);
 
             return output;
         }

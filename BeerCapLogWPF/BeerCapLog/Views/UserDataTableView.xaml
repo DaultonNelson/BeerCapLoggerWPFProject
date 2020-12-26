@@ -26,12 +26,13 @@
         <WrapPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="2" Margin="10">
 
             <Button Width="30" Height="30" Content="+" ToolTip="Add New Cap" x:Name="AddNewCapForUser"/>
+            <Button Width="30" Height="30" Content="-" ToolTip="Remove Selected Cap" x:Name="RemoveSelectedCap"/>
 
         </WrapPanel>
         
         <DataGrid AlternatingRowBackground="LightGray" Grid.Row="3" Grid.Column="1"
                   Margin="10" x:Name="CollectedCaps" CanUserAddRows="False" CanUserDeleteRows="False"
-                  IsReadOnly="True" AutoGenerateColumns="False">
+                  IsReadOnly="True" AutoGenerateColumns="False" SelectedItem="{Binding SelectedGridItem}">
             
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding Path=Id}"/>

@@ -50,7 +50,8 @@ namespace BeerCapLog.DataAccess
                         i + 1,
                         picking.GetRandomItem<string>(firstNames),
                         picking.GetRandomItem<string>(lastNames),
-                        picking.GenerateRandomDate()
+                        picking.GenerateRandomDate(),
+                        DateTime.Now
                     )
                 );
             }

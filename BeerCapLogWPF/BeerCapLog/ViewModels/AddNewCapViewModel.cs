@@ -173,14 +173,17 @@ namespace BeerCapLog.ViewModels
 
                 userCollection.SaveCapCollectionToFile(user);
 
-                manager.ShowWindow(new UserDataTableViewModel(user), null, null);
-                TryClose();
+                BackToDataTable();
             }
         }
 
+        /// <summary>
+        /// Takes the User back to their DataTable.
+        /// </summary>
         public void BackToDataTable()
         {
-            //TODO - Flesh this function out more.
+            manager.ShowWindow(new UserDataTableViewModel(user), null, null);
+            TryClose();
         }
 
         /// <summary>

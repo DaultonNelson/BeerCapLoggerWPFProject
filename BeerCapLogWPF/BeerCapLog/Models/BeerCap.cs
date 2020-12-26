@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,13 +8,31 @@ using System.Windows.Media;
 
 namespace BeerCapLog.Models
 {
-    public class BeerCap : IComparable<BeerCap>
+    public class BeerCap : IComparable<BeerCap>, INotifyPropertyChanged
     {
         #region Properties
         /// <summary>
+        /// The event that fires off when a property is changed.
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private int _id;
+
+        /// <summary>
         /// The identification number of this Beer Cap.
         /// </summary>
-        public int Id { get; set; }
+        public int Id {
+            get { return _id; }
+            set
+            {
+                if (_id != value)
+                {
+                    _id = value;
+                    OnPropertyChanged("Id");
+                }
+            }
+        }
+
         /// <summary>
         /// The path to this Cap's Image.
         /// </summary>
@@ -91,6 +110,16 @@ namespace BeerCapLog.Models
             output = Id.CompareTo(other.Id);
 
             return output;
+        }
+
+        //For notification of property change
+        protected void OnPropertyChanged(string name)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(name));
+            }
         }
     }
 }

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace BeerCapLog.ViewModels
 {
@@ -15,7 +16,7 @@ namespace BeerCapLog.ViewModels
     {
         #region Variables
         /// <summary>
-        /// The Collection of Caps collected by the user.
+        /// A collection containing the User's collected Beer Caps.
         /// </summary>
         public BindableCollection<BeerCap> CollectedCaps { get; set; }
 
@@ -23,6 +24,16 @@ namespace BeerCapLog.ViewModels
         /// The Header of the window.
         /// </summary>
         public string HeaderText { get; }
+
+        #region Selected Grid Item
+        private BeerCap _selectedGridItem;
+
+        public BeerCap SelectedGridItem
+        {
+            get { return _selectedGridItem; }
+            set { _selectedGridItem = value; }
+        } 
+        #endregion
 
         /// <summary>
         /// Manages the Windows for Caliburn Micro
@@ -61,6 +72,38 @@ namespace BeerCapLog.ViewModels
         {
             manager.ShowWindow(new AddNewCapViewModel(dataTableUser, CollectedCaps.ToList()), null, null);
             TryClose();
+        }
+
+        /// <summary>
+        /// Removes the User selected Beer Cap from their collection.
+        /// </summary>
+        public void RemoveSelectedCap()
+        {
+            if (SelectedGridItem == null)
+            {
+                MessageBox.Show("Please select a Beer Cap.", "Non-Selection Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if(MessageBox.Show($"Do you want to Remove Beer Cap #{SelectedGridItem.Id} from your collection?", "Remove Cap From Collection?", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No) == MessageBoxResult.Yes)
+            {
+                CollectedCaps.RemoveAt(SelectedGridItem.Id - 1);
+                UpdateBeerCapIds();
+                CollectedCaps.ToList().SaveCapCollectionToFile(dataTableUser);
+
+                MessageBox.Show("Beer Cap Removed", "Removed", MessageBoxButton.OK);
+            }
+        }
+
+        /// <summary>
+        /// Updates the Beer Cap IDs in the User's collection.
+        /// </summary>
+        private void UpdateBeerCapIds()
+        {
+            for (int i = 0; i < CollectedCaps.Count; i++)
+            {
+                CollectedCaps[i].Id = i + 1;
+            }
         }
     }
 }
