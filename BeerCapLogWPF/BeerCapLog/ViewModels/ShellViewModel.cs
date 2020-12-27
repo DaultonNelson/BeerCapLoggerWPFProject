@@ -1,5 +1,4 @@
-﻿using BeerCapLog.DataAccess;
-using BeerCapLog.DataUtilities;
+﻿using BeerCapLog.DataUtilities;
 using BeerCapLog.Models;
 using Caliburn.Micro;
 using System;
@@ -41,8 +40,6 @@ namespace BeerCapLog.ViewModels
 
         public ShellViewModel()
         {
-            MockUserProcessor tsda = new MockUserProcessor();
-
             //sortedUsersByBirth = tsda.GenerateMockUsers(11);
             sortedUsersByBirth = UtilityFilePaths.UserModelsFile.FullFilePath().LoadFile().ConvertLinesIntoUsers();
 

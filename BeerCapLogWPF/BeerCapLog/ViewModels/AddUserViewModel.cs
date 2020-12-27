@@ -1,5 +1,4 @@
-﻿using BeerCapLog.DataAccess;
-using BeerCapLog.DataUtilities;
+﻿using BeerCapLog.DataUtilities;
 using BeerCapLog.Models;
 using Caliburn.Micro;
 using System;
@@ -69,8 +68,9 @@ namespace BeerCapLog.ViewModels
 
             RandomPicking rp = new RandomPicking();
 
-            RightCapImage = CapImage.GetFullPathFromName(
-                rp.GetRandomItem<string>(CapImage.CapImageNames));
+            //TODO - Replace this Right Cap Image with something.
+            RightCapImage = CapImageFilePaths.GetFullPathFromName(
+                rp.GetRandomItem<string>(CapImageFilePaths.CapImageNames));
 
             UserDateOfBirth = DateTime.Today;
         }

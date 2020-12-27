@@ -1,5 +1,4 @@
-﻿using BeerCapLog.DataAccess;
-using BeerCapLog.DataUtilities;
+﻿using BeerCapLog.DataUtilities;
 using BeerCapLog.Models;
 using Caliburn.Micro;
 using System;
@@ -11,14 +10,13 @@ using System.Windows;
 
 namespace BeerCapLog.ViewModels
 {
-    //TODO - Some way is needed to delete existing caps in collection
     public class UserDataTableViewModel : Screen
     {
         #region Variables
         /// <summary>
         /// A collection containing the User's collected Beer Caps.
         /// </summary>
-        public BindableCollection<BeerCap> CollectedCaps { get; set; }
+        public BindableCollection<BeerCapModel> CollectedCaps { get; set; }
 
         /// <summary>
         /// The Header of the window.
@@ -26,9 +24,9 @@ namespace BeerCapLog.ViewModels
         public string HeaderText { get; }
 
         #region Selected Grid Item
-        private BeerCap _selectedGridItem;
+        private BeerCapModel _selectedGridItem;
 
-        public BeerCap SelectedGridItem
+        public BeerCapModel SelectedGridItem
         {
             get { return _selectedGridItem; }
             set { _selectedGridItem = value; }
@@ -59,10 +57,10 @@ namespace BeerCapLog.ViewModels
             
             //MockBeerCapProcessor mbcp = new MockBeerCapProcessor();
 
-            List<BeerCap> sortedCapCollection = dataTableUser.GetSavedBeerCapCollection();
+            List<BeerCapModel> sortedCapCollection = dataTableUser.GetSavedBeerCapCollection();
             sortedCapCollection.Sort();
 
-            CollectedCaps = new BindableCollection<BeerCap>(sortedCapCollection);
+            CollectedCaps = new BindableCollection<BeerCapModel>(sortedCapCollection);
         }
 
         /// <summary>

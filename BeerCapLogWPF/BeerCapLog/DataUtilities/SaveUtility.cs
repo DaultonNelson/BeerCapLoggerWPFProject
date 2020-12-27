@@ -15,7 +15,7 @@ namespace BeerCapLog.DataUtilities
         /// Saves a List of User Models to a .csv file.
         /// </summary>
         /// <param name="userModels">
-        /// The UserModels we're saving.
+        /// The UserModels being saved.
         /// </param>
         public static void SaveToUsersFile(this List<UserModel> userModels)
         {
@@ -30,6 +30,27 @@ namespace BeerCapLog.DataUtilities
         }
 
         /// <summary>
+        /// Saves a List of Brand Models to a .csv file.
+        /// </summary>
+        /// <param name="brandModels">
+        /// The BrandModels being saved.
+        /// </param>
+        public static void SaveToBrandsFile(this List<BrandModel> brandModels)
+        {
+            List<string> lines = new List<string>();
+
+            foreach (BrandModel brand in brandModels)
+            {
+                string brandPrimaryCol = brand.PrimaryColor.ToSavableColorString();
+                string brandSecondaryCol = brand.SecondaryColor.ToSavableColorString();
+
+                lines.Add($"{brand.Id},{brand.BrandName},{brand.BrandImagePath},{brandPrimaryCol},{brandSecondaryCol}");
+            }
+
+            File.WriteAllLines(UtilityFilePaths.BrandModelsFile.FullFilePath(), lines);
+        }
+
+        /// <summary>
         /// Saves a Beer Cap Collection to a special .csv file tied to the User.
         /// </summary>
         /// <param name="capCollection">
@@ -38,16 +59,13 @@ namespace BeerCapLog.DataUtilities
         /// <param name="collectionOwner">
         /// The User that owns the Beer Cap Collection.
         /// </param>
-        public static void SaveCapCollectionToFile(this List<BeerCap> capCollection, UserModel collectionOwner)
+        public static void SaveCapCollectionToFile(this List<BeerCapModel> capCollection, UserModel collectionOwner)
         {
             List<string> lines = new List<string>();
 
-            foreach (BeerCap cap in capCollection)
+            foreach (BeerCapModel cap in capCollection)
             {
-                string primaryColorString = cap.PrimaryCapColor.ToSavableColorString();
-                string secondaryColorString = cap.SecondaryCapColor.ToSavableColorString();
-
-                lines.Add($"{cap.Id},{cap.CapImagePath},{cap.CapBrandName},{(int)cap.CapQuality},{primaryColorString},{secondaryColorString},{cap.DateAquired.ToShortDateString()},{cap.UnderCapMessage}");
+                lines.Add($"{cap.Id},{cap.CapBrand.Id},{(int)cap.CapQuality},{cap.DateAquired.ToShortDateString()},{cap.UnderCapMessage}");
             }
 
             File.WriteAllLines(collectionOwner.CapCollectonFileName().FullFilePath(), lines);

@@ -90,16 +90,19 @@
     <Compile Include="DataUtilities\LoadUtility.cs" />
     <Compile Include="DataUtilities\SaveUtility.cs" />
     <Compile Include="DataUtilities\UtilityFilePaths.cs" />
+    <Compile Include="Models\BrandModel.cs" />
     <Compile Include="RandomPicking.cs" />
-    <Compile Include="DataAccess\CapImage.cs" />
-    <Compile Include="DataAccess\MockBeerCapProcessor.cs" />
-    <Compile Include="DataAccess\MockUserProcessor.cs" />
-    <Compile Include="Models\BeerCap.cs" />
+    <Compile Include="DataUtilities\CapImageFilePaths.cs" />
+    <Compile Include="Models\BeerCapModel.cs" />
     <Compile Include="Models\UserModel.cs" />
+    <Compile Include="ViewModels\AddNewBrandViewModel.cs" />
     <Compile Include="ViewModels\AddNewCapViewModel.cs" />
     <Compile Include="ViewModels\AddUserViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\UserDataTableViewModel.cs" />
+    <Compile Include="Views\AddNewBrandView.xaml.cs">
+      <DependentUpon>AddNewBrandView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AddNewCapView.xaml.cs">
       <DependentUpon>AddNewCapView.xaml</DependentUpon>
     </Compile>
@@ -142,6 +145,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Views\AddNewBrandView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\AddNewCapView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

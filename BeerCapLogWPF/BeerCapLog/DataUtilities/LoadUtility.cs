@@ -69,6 +69,37 @@ namespace BeerCapLog.DataUtilities
         }
 
         /// <summary>
+        /// Makes Brands from a collection of lines.
+        /// </summary>
+        /// <param name="lines">
+        /// The lines being converted.
+        /// </param>
+        /// <returns>
+        /// A list of Brands.
+        /// </returns>
+        public static List<BrandModel> ConvertLinesIntoBrands(this List<string> lines)
+        {
+            List<BrandModel> loadedBrands = new List<BrandModel>();
+
+            foreach (string line in lines)
+            {
+                string[] props = line.Split(',');
+
+                BrandModel brand = new BrandModel(
+                    int.Parse(props[0]), //ID
+                    props[1], //Name
+                    props[2], //Path
+                    props[3].ParseIntoColor(), //Primary
+                    props[4].ParseIntoColor() //Secondary
+                );
+
+                loadedBrands.Add(brand);
+            }
+
+            return loadedBrands;
+        }
+
+        /// <summary>
         /// Gets a saved Beer Cap Collection based on the User.
         /// </summary>
         /// <param name="collectionOwner">
@@ -77,9 +108,9 @@ namespace BeerCapLog.DataUtilities
         /// <returns>
         /// The User's Beer Cap collection.
         /// </returns>
-        public static List<BeerCap> GetSavedBeerCapCollection(this UserModel collectionOwner)
+        public static List<BeerCapModel> GetSavedBeerCapCollection(this UserModel collectionOwner)
         {
-            List<BeerCap> loadedCaps = new List<BeerCap>();
+            List<BeerCapModel> loadedCaps = new List<BeerCapModel>();
 
             List<string> lines = collectionOwner.CapCollectonFileName().FullFilePath().LoadFile();
 
@@ -87,15 +118,12 @@ namespace BeerCapLog.DataUtilities
             {
                 string[] props = line.Split(',');
 
-                BeerCap capFromString = new BeerCap(
+                BeerCapModel capFromString = new BeerCapModel(
                     int.Parse(props[0]),//ID
-                    props[1], //Path
-                    props[2], //Brand Name
-                    (Quality)int.Parse(props[3]), //Quality
-                    props[4].ParseIntoColor(), //Primary Color
-                    props[5].ParseIntoColor(), //Secondary Color
-                    DateTime.Parse(props[6]), //Date Acquired
-                    props[7] //Under Cap Message
+                    int.Parse(props[1]).GetBrandFromIndex(), //Brand
+                    (Quality)int.Parse(props[2]), //Quality
+                    DateTime.Parse(props[3]), //Date Acquired
+                    props[4] //Under Cap Message
                 );
 
                 loadedCaps.Add(capFromString);
@@ -127,6 +155,20 @@ namespace BeerCapLog.DataUtilities
             output = Color.FromArgb(propA, propR, propG, propB);
 
             return output;
+        }
+
+        /// <summary>
+        /// Tries and Parses a given int into a Brand.
+        /// </summary>
+        /// <param name="index">
+        /// The index of the Brand being parsed.
+        /// </param>
+        /// <returns>
+        /// A full Brand.
+        /// </returns>
+        public static BrandModel GetBrandFromIndex(this int index)
+        {
+            return UtilityFilePaths.BrandModelsFile.FullFilePath().LoadFile().ConvertLinesIntoBrands().Where(x => x.Id == index).First();
         }
     }
 }

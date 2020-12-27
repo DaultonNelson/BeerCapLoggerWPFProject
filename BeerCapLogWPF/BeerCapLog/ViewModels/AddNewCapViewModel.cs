@@ -1,5 +1,4 @@
-﻿using BeerCapLog.DataAccess;
-using BeerCapLog.DataUtilities;
+﻿using BeerCapLog.DataUtilities;
 using BeerCapLog.Models;
 using Caliburn.Micro;
 using System;
@@ -16,36 +15,24 @@ namespace BeerCapLog.ViewModels
     public class AddNewCapViewModel : Screen
     {
         #region Variables
+        //TODO - Change Brand Dropdown wire up - TEST
         /// <summary>
         /// The Brands that will populate the Brand Dropdown Control.
         /// </summary>
-        public BindableCollection<string> BrandNames { get; set; }
+        public BindableCollection<BrandModel> Brands { get; set; }
         /// <summary>
         /// All the possible qualities a Beer Cap can be in.
         /// </summary>
         public BindableCollection<Quality> PossibleQualities { get; set; }
-        /// <summary>
-        /// A collection of all the full file paths towards the Cap Images.
-        /// </summary>
-        public BindableCollection<string> CapImagePaths { get; set; }
 
         #region Selected Brand
-        private string _selectedBrandName;
+        private BrandModel _selectedBrand;
 
-        public string SelectedBrandName
+        public BrandModel SelectedBrand
         {
-            get { return _selectedBrandName; }
-            set { _selectedBrandName = value; }
+            get { return _selectedBrand; }
+            set { _selectedBrand = value; }
         }
-        #endregion
-        #region Selected Cap Path
-        private string _selectedCapPath;
-
-        public string SelectedCapPath
-        {
-            get { return _selectedCapPath; }
-            set { _selectedCapPath = value; }
-        } 
         #endregion
         #region Selected Quality
         private Quality _selectedQuality;
@@ -64,24 +51,6 @@ namespace BeerCapLog.ViewModels
             get { return _selectedAquireDate; }
             set { _selectedAquireDate = value; }
         }
-        #endregion
-        #region Selected Primary Color
-        private Color _selectedPrimaryColor;
-
-        public Color SelectedPrimaryColor
-        {
-            get { return _selectedPrimaryColor; }
-            set { _selectedPrimaryColor = value; }
-        } 
-        #endregion
-        #region Selected Secondary Color
-        private Color _selectedSecondaryColor;
-
-        public Color SelectedSecondaryColor
-        {
-            get { return _selectedSecondaryColor; }
-            set { _selectedSecondaryColor = value; }
-        } 
         #endregion
         #region Created Under Message
         private string _createdUnderMessage;
@@ -104,7 +73,7 @@ namespace BeerCapLog.ViewModels
         /// <summary>
         /// The User's existing Beer Cap Collection.
         /// </summary>
-        private List<BeerCap> userCollection = new List<BeerCap>();
+        private List<BeerCapModel> userCollection = new List<BeerCapModel>();
         #endregion
 
         /// <summary>
@@ -116,38 +85,20 @@ namespace BeerCapLog.ViewModels
         /// <param name="usersBeerCapCollection">
         /// The User's Beer Cap collection.
         /// </param>
-        public AddNewCapViewModel (UserModel userAddingCap, List<BeerCap> usersBeerCapCollection)
+        public AddNewCapViewModel (UserModel userAddingCap, List<BeerCapModel> usersBeerCapCollection)
         {
             //MockUserProcessor msp = new MockUserProcessor();
 
             user = userAddingCap;
             userCollection = usersBeerCapCollection;
+
+            List<BrandModel> savedBrands = UtilityFilePaths.BrandModelsFile.FullFilePath().LoadFile().ConvertLinesIntoBrands();
             
-            MockBeerCapProcessor mbcp = new MockBeerCapProcessor();
-            
-            BrandNames = new BindableCollection<string>(mbcp.brandNames);
+            Brands = new BindableCollection<BrandModel>(savedBrands);
 
-            #region Get Cap Image Paths
-            List<string> fullCapPaths = new List<string>();
-
-            for (int i = 0; i < CapImage.CapImageNames.Length; i++)
-            {
-                fullCapPaths.Add(CapImage.GetFullPathFromName(CapImage.CapImageNames[i]));
-            }
-
-            CapImagePaths = new BindableCollection<string>(fullCapPaths);
-
-            SelectedCapPath = CapImagePaths[0];
-            #endregion
-
-            PossibleQualities = new BindableCollection<Quality>(mbcp.qualities);
+            PossibleQualities = new BindableCollection<Quality>((Quality[])Enum.GetValues(typeof(Quality)));
 
             SelectedAquireDate = DateTime.Today;
-
-            #region Initialize Selected Colors
-            SelectedPrimaryColor = Color.FromArgb(0, 255, 255, 255);
-            SelectedSecondaryColor = Color.FromArgb(0, 255, 255, 255); 
-            #endregion
         }
 
         /// <summary>
@@ -157,14 +108,11 @@ namespace BeerCapLog.ViewModels
         {
             if (ValidateFormData())
             {
-                BeerCap newCap = new BeerCap
+                BeerCapModel newCap = new BeerCapModel
                 (
                     userCollection.Count + 1,
-                    SelectedCapPath,
-                    SelectedBrandName,
+                    SelectedBrand,
                     SelectedQuality,
-                    SelectedPrimaryColor,
-                    SelectedSecondaryColor,
                     SelectedAquireDate,
                     CreatedUnderMessage
                 );
@@ -186,6 +134,11 @@ namespace BeerCapLog.ViewModels
             TryClose();
         }
 
+        public void GoToAddBrandWindow()
+        {
+            //TODO - Implement Go To Add Brand Window function.
+        }
+
         /// <summary>
         /// Check if the Form Data is valid.
         /// </summary>
@@ -194,27 +147,15 @@ namespace BeerCapLog.ViewModels
         {
             bool output = true;
 
-            if (SelectedBrandName == null || SelectedBrandName == string.Empty)
+            if (SelectedBrand == null)
             {
-                MessageBox.Show("The Cap must have a Brand Name!", "Null Reference Exception", MessageBoxButton.OK, MessageBoxImage.Error);
-                output = false;
-            }
-
-            if (SelectedCapPath == null || SelectedCapPath == string.Empty)
-            {
-                MessageBox.Show("The Cap must have an Image associated with it!", "Null Reference Exception", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("The Cap must have a Brand!", "Null Reference Exception", MessageBoxButton.OK, MessageBoxImage.Error);
                 output = false;
             }
 
             if (SelectedAquireDate > DateTime.Today)
             {
                 MessageBox.Show("You cannot have acquired your Beer Cap from the future!", "Invalid Temporal Logging", MessageBoxButton.OK, MessageBoxImage.Error);
-                output = false;
-            }
-            
-            if (SelectedPrimaryColor.A != 255 || SelectedPrimaryColor.A != 255)
-            {
-                MessageBox.Show("Colors must have be fully opaque!  No Transparency or Alpha!", "Invalid Data Entry", MessageBoxButton.OK, MessageBoxImage.Error);
                 output = false;
             }
 

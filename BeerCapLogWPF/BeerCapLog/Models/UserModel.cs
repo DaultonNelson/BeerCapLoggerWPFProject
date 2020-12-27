@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace BeerCapLog.Models
 {
-    //TODO - Add Last Time Logged in
     public class UserModel : IComparable<UserModel>
     {
         #region Properties
