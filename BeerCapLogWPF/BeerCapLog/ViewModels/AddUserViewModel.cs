@@ -67,10 +67,8 @@ namespace BeerCapLog.ViewModels
             usersLoadedFromShell = shellUsers;
 
             RandomPicking rp = new RandomPicking();
-
-            //TODO - Replace this Right Cap Image with something.
-            RightCapImage = CapImageFilePaths.GetFullPathFromName(
-                rp.GetRandomItem<string>(CapImageFilePaths.CapImageNames));
+            
+            RightCapImage = "AA_UserOutOfCaps".FullCapImagePath();
 
             UserDateOfBirth = DateTime.Today;
         }

@@ -19,9 +19,9 @@ namespace BeerCapLog.Models
         /// </summary>
         public string BrandName { get; set; }
         /// <summary>
-        /// The path that leads to the Image associated with this Brand.
+        /// The file name associated with the Brand Image file.
         /// </summary>
-        public string BrandImagePath { get; set; }
+        public string BrandImageFileName { get; set; }
         /// <summary>
         /// The primary color of this Brand.
         /// </summary>
@@ -46,14 +46,14 @@ namespace BeerCapLog.Models
         /// </summary>
         /// <param name="_id">The ID of the Brand</param>
         /// <param name="_name">The name of the Brand</param>
-        /// <param name="_path">The path to the Brand Image</param>
+        /// <param name="_fileName">The file name of the Brand Image</param>
         /// <param name="_primary">The Primary Color of the Brand</param>
         /// <param name="_secondary">The Secondy Color of the Brand Image</param>
-        public BrandModel(int _id, string _name, string _path, Color _primary, Color _secondary)
+        public BrandModel(int _id, string _name, string _fileName, Color _primary, Color _secondary)
         {
             Id = _id;
             BrandName = _name;
-            BrandImagePath = _path;
+            BrandImageFileName = _fileName;
             PrimaryColor = _primary;
             SecondaryColor = _secondary;
         }

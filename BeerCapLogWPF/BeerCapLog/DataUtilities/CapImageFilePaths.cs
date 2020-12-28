@@ -12,7 +12,7 @@ namespace BeerCapLog.DataUtilities
         /// <summary>
         /// The path that goes to the CapImages folder.
         /// </summary>
-        public static string FolderPath {
+        public static string CapImageFolderPath {
             get
             {
                 return @"D:\Side Projects\BottleCapCollection\BeerCapLoggerWPFProject\BeerCapImages\";
@@ -20,23 +20,23 @@ namespace BeerCapLog.DataUtilities
         }
         
         /// <summary>
-        /// Returns the full path to an Image file via given name.
+        /// Returngs a full path towards a file in the CapImages area. DO NOT ADD .PNG!
         /// </summary>
-        /// <param name="capImageName">
-        /// The name of the Cap Image wanted.
+        /// <param name="capImageFileName">
+        /// The Cap Image file name.
         /// </param>
         /// <returns>
-        /// The full path directed towards the image file.
+        /// The full Cap Image file path.
         /// </returns>
-        public static string GetFullPathFromName(string capImageName)
+        public static string FullCapImagePath(this string capImageFileName)
         {
-            if (!CapImageNames.Contains(capImageName))
+            if (capImageFileName.Contains(".png"))
             {
-                MessageBox.Show("Invalid name given to CapImage function!", "Invalid Data Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Give file name cannot have .png in it!", "Invalid Backend Information", MessageBoxButton.OK, MessageBoxImage.Error);
                 return string.Empty;
             }
 
-            return $"{FolderPath}{capImageName}.png";
+            return $"{CapImageFolderPath}{capImageFileName}.png";
         }
     }
 }

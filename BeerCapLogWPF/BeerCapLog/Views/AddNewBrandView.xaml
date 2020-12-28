@@ -6,7 +6,7 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:BeerCapLog.Views"
         mc:Ignorable="d" FontSize="24" FontFamily="Yu Gothic Light"
-        Title="ShellView" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+        Title="ShellView" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
@@ -16,31 +16,47 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
         <TextBlock Text="Add New Brand" FontWeight="Black" FontSize="50" FontFamily="Yu Gothic UI Semibold"
                    Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2"/>
 
-        <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="1" Margin="10">
-            <TextBlock Text="Brand Name"/>
-            <TextBox Margin="10" ToolTip="Enter Brand Name"/>
+        <Border Grid.Column="1" Grid.Row="2" Margin="20"
+                BorderBrush="Black" BorderThickness="1" Padding="10">
+            <ScrollViewer>
+                <StackPanel Orientation="Vertical">
 
-            <!--Primary Color Field-->
-            <TextBlock Text="Primary Color" FontFamily="Yu Gothic Medium"/>
-            <xctk:ColorPicker Margin="10" SelectedColor="{Binding SelectedPrimaryColor}" ToolTip="Select Cap Primary Color"/>
+                    <!--Brand Name Field-->
+                    <TextBlock Text="Brand Name" FontFamily="Yu Gothic Medium"/>
+                    <TextBox Margin="10" x:Name="CreatedBrandName" ToolTip="Enter Brand Name"/>
 
-            <!--Secondary Color Field-->
-            <TextBlock Text="Secondary Color" FontFamily="Yu Gothic Medium"/>
-            <xctk:ColorPicker Margin="10" SelectedColor="{Binding SelectedSecondaryColor}" ToolTip="Select Cap Secondary Color"/>
-        </StackPanel>
-
-        <Button MinHeight="75" Width="75" ToolTip="Select Image" Margin="20" Grid.Row="3" Grid.Column="1"
+                    <!--Add Image Field-->
+                    <TextBlock Text="Brand Image" FontFamily="Yu Gothic Medium"/>
+                    <Button MinHeight="75" Width="75" ToolTip="Select Image" Margin="10" Grid.Row="3" Grid.Column="1"
                 HorizontalAlignment="Left" Background="#00000000" x:Name="BrowseForBrandImage">
-            <Image Source="D:\Side Projects\BottleCapCollection\BeerCapLoggerWPFProject\BeerCapImages\AA_Placeholder.png"/>
-        </Button>
+                        <Image Source="D:\Side Projects\BottleCapCollection\BeerCapLoggerWPFProject\BeerCapImages\AA_Placeholder.png"/>
+                    </Button>
+
+                    <!--Primary Color Field-->
+                    <TextBlock Text="Primary Color" FontFamily="Yu Gothic Medium"/>
+                    <xctk:ColorPicker Margin="10" SelectedColor="{Binding SelectedPrimaryColor}" ToolTip="Select Brand Primary Color"/>
+
+                    <!--Secondary Color Field-->
+                    <TextBlock Text="Secondary Color" FontFamily="Yu Gothic Medium"/>
+                    <xctk:ColorPicker Margin="10" SelectedColor="{Binding SelectedSecondaryColor}" ToolTip="Select Brand Secondary Color"/>
+
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+
+        <!--Create Brand Button-->
+        <Button Grid.Column="1" Grid.Row="3"
+                MinHeight="50" Width="175" ToolTip="Create Brand"
+                HorizontalAlignment="Right" Margin="10"
+                Content="Create Brand" x:Name="TryCreateBrand"/>
+        
     </Grid>
 </Window>

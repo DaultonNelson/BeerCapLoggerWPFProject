@@ -26,7 +26,7 @@ namespace BeerCapLog.DataUtilities
                 lines.Add($"{user.Id},{user.FirstName},{user.LastName},{user.DateOfBirth.ToShortDateString()},{user.TimeLastLoggedIn},{user.DateJoined.ToShortDateString()}");
             }
 
-            File.WriteAllLines(UtilityFilePaths.UserModelsFile.FullFilePath(), lines);
+            File.WriteAllLines(UtilityFilePaths.UserModelsFile.FullUtilitiesPath(), lines);
         }
 
         /// <summary>
@@ -44,10 +44,10 @@ namespace BeerCapLog.DataUtilities
                 string brandPrimaryCol = brand.PrimaryColor.ToSavableColorString();
                 string brandSecondaryCol = brand.SecondaryColor.ToSavableColorString();
 
-                lines.Add($"{brand.Id},{brand.BrandName},{brand.BrandImagePath},{brandPrimaryCol},{brandSecondaryCol}");
+                lines.Add($"{brand.Id},{brand.BrandName},{brand.BrandImageFileName},{brandPrimaryCol},{brandSecondaryCol}");
             }
 
-            File.WriteAllLines(UtilityFilePaths.BrandModelsFile.FullFilePath(), lines);
+            File.WriteAllLines(UtilityFilePaths.BrandModelsFile.FullUtilitiesPath(), lines);
         }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace BeerCapLog.DataUtilities
                 lines.Add($"{cap.Id},{cap.CapBrand.Id},{(int)cap.CapQuality},{cap.DateAquired.ToShortDateString()},{cap.UnderCapMessage}");
             }
 
-            File.WriteAllLines(collectionOwner.CapCollectonFileName().FullFilePath(), lines);
+            File.WriteAllLines(collectionOwner.CapCollectonFileName().FullUtilitiesPath(), lines);
         }
 
         /// <summary>

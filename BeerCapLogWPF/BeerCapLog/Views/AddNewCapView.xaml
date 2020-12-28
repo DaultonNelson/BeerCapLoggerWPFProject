@@ -31,7 +31,7 @@
                 <StackPanel Orientation="Vertical">
                     <!--Brand Dropdown-->
                     <TextBlock Text="Brand" FontFamily="Yu Gothic Medium"/>
-                    <WrapPanel Margin="10" Orientation="Horizontal">
+                    <StackPanel Margin="10" Orientation="Horizontal">
                         <ComboBox x:Name="Brands" SelectedItem="{Binding SelectedBrand}" ToolTip="Select Brand" Width="600">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
@@ -42,8 +42,8 @@
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
                         </ComboBox>
-                        <Button Width="40" Content="+" ToolTip="Add New Brand" x:Name="GoToAddBrandWindow" Margin="5"/>
-                    </WrapPanel>
+                        <Button Width="40" Content="+" ToolTip="Add New Brand" x:Name="OpenAddBrandWindow" Margin="5"/>
+                    </StackPanel>
 
                     <!--Qualities Dropdown-->
                     <TextBlock Text="Quality" FontFamily="Yu Gothic Medium"/>

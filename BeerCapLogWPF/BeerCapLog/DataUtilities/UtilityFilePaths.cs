@@ -13,7 +13,7 @@ namespace BeerCapLog.DataUtilities
         /// <summary>
         /// The path that leads to the Utilities folder directory.
         /// </summary>
-        public static string FolderPath
+        public static string UtilitiesFolderPath
         {
             get
             {
@@ -36,17 +36,17 @@ namespace BeerCapLog.DataUtilities
         #endregion
 
         /// <summary>
-        /// Returns the full file path towards a file.
+        /// Returns the full file path towards a file in the Utilities folder.
         /// </summary>
         /// <param name="file">
         /// The name of the file.
         /// </param>
         /// <returns>
-        /// The full file path.
+        /// The full utilities file path.
         /// </returns>
-        public static string FullFilePath(this string file)
+        public static string FullUtilitiesPath(this string file)
         {
-            return $"{FolderPath}{file}";
+            return $"{UtilitiesFolderPath}{file}";
         }
 
         /// <summary>

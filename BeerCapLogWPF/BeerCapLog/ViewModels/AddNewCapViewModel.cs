@@ -11,7 +11,6 @@ using System.Windows.Media;
 
 namespace BeerCapLog.ViewModels
 {
-    //TODO - Cap Image Dropdown (Make grid or wider for content?)
     public class AddNewCapViewModel : Screen
     {
         #region Variables
@@ -92,7 +91,7 @@ namespace BeerCapLog.ViewModels
             user = userAddingCap;
             userCollection = usersBeerCapCollection;
 
-            List<BrandModel> savedBrands = UtilityFilePaths.BrandModelsFile.FullFilePath().LoadFile().ConvertLinesIntoBrands();
+            List<BrandModel> savedBrands = UtilityFilePaths.BrandModelsFile.FullUtilitiesPath().LoadFile().ConvertLinesIntoBrands();
             
             Brands = new BindableCollection<BrandModel>(savedBrands);
 
@@ -134,9 +133,12 @@ namespace BeerCapLog.ViewModels
             TryClose();
         }
 
-        public void GoToAddBrandWindow()
+        /// <summary>
+        /// Opens the Add New Brand View.
+        /// </summary>
+        public void OpenAddBrandWindow()
         {
-            //TODO - Implement Go To Add Brand Window function.
+            manager.ShowWindow(new AddNewBrandViewModel(), null, null);
         }
 
         /// <summary>

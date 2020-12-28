@@ -41,7 +41,7 @@ namespace BeerCapLog.ViewModels
         public ShellViewModel()
         {
             //sortedUsersByBirth = tsda.GenerateMockUsers(11);
-            sortedUsersByBirth = UtilityFilePaths.UserModelsFile.FullFilePath().LoadFile().ConvertLinesIntoUsers();
+            sortedUsersByBirth = UtilityFilePaths.UserModelsFile.FullUtilitiesPath().LoadFile().ConvertLinesIntoUsers();
 
             if (sortedUsersByBirth.Count <= 0)
             {

@@ -112,7 +112,7 @@ namespace BeerCapLog.DataUtilities
         {
             List<BeerCapModel> loadedCaps = new List<BeerCapModel>();
 
-            List<string> lines = collectionOwner.CapCollectonFileName().FullFilePath().LoadFile();
+            List<string> lines = collectionOwner.CapCollectonFileName().FullUtilitiesPath().LoadFile();
 
             foreach (string line in lines)
             {
@@ -168,7 +168,7 @@ namespace BeerCapLog.DataUtilities
         /// </returns>
         public static BrandModel GetBrandFromIndex(this int index)
         {
-            return UtilityFilePaths.BrandModelsFile.FullFilePath().LoadFile().ConvertLinesIntoBrands().Where(x => x.Id == index).First();
+            return UtilityFilePaths.BrandModelsFile.FullUtilitiesPath().LoadFile().ConvertLinesIntoBrands().Where(x => x.Id == index).First();
         }
     }
 }
