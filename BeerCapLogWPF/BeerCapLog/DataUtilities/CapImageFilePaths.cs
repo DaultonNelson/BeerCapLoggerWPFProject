@@ -15,10 +15,10 @@ namespace BeerCapLog.DataUtilities
         public static string CapImageFolderPath {
             get
             {
-                return @"D:\Side Projects\BottleCapCollection\BeerCapLoggerWPFProject\BeerCapImages\";
+                return @"D:\Side Projects\BottleCapCollection\BeerCapLoggerWPFProject\BeerCapImages\SavedBrandCaps\";
             }
         }
-        
+
         /// <summary>
         /// Returngs a full path towards a file in the CapImages area. DO NOT ADD .PNG!
         /// </summary>
@@ -30,13 +30,13 @@ namespace BeerCapLog.DataUtilities
         /// </returns>
         public static string FullCapImagePath(this string capImageFileName)
         {
-            if (capImageFileName.Contains(".png"))
+            if (!capImageFileName.Contains(".png"))
             {
-                MessageBox.Show("Give file name cannot have .png in it!", "Invalid Backend Information", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("File Name must have .png in it!", "Invalid Backend Information", MessageBoxButton.OK, MessageBoxImage.Error);
                 return string.Empty;
             }
 
-            return $"{CapImageFolderPath}{capImageFileName}.png";
+            return $"{CapImageFolderPath}{capImageFileName}";
         }
     }
 }
