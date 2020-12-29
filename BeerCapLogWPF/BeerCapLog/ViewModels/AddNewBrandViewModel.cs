@@ -19,10 +19,18 @@ namespace BeerCapLog.ViewModels
     public class AddNewBrandViewModel : Screen
     {
         #region Variables
-        /// <summary>
-        /// Manages the Windows for Caliburn Micro.
-        /// </summary>
-        private IWindowManager manager = new WindowManager();
+
+        #region Existing Brand Images
+        private BindableCollection<string> _existingBrandImages;
+
+        public BindableCollection<string> ExistingBrandImages
+        {
+            get { return _existingBrandImages; }
+            set {
+                _existingBrandImages = value;
+                NotifyOfPropertyChange(() => ExistingBrandImages);
+            }
+        } 
         #endregion
 
         #region Created Brand Name
@@ -33,6 +41,18 @@ namespace BeerCapLog.ViewModels
             get { return _createdBrandName; }
             set { _createdBrandName = value; }
         }
+        #endregion
+        #region Selected Brand Image
+        private string _selectedBrandImage;
+
+        public string SelectedBrandImage
+        {
+            get { return _selectedBrandImage; }
+            set {
+                _selectedBrandImage = value;
+                NotifyOfPropertyChange(() => SelectedBrandImage);
+            }
+        } 
         #endregion
         #region Selected Primary Color
         private Color _selectedPrimaryColor;
@@ -50,22 +70,48 @@ namespace BeerCapLog.ViewModels
         {
             get { return _selectedSecondaryColor; }
             set { _selectedSecondaryColor = value; }
-        } 
+        }
         #endregion
+
+        /// <summary>
+        /// Manages the Windows for Caliburn Micro.
+        /// </summary>
+        private IWindowManager manager = new WindowManager();
+        /// <summary>
+        /// The Add New Cap View Model that this window was opened from.
+        /// </summary>
+        private AddNewCapViewModel addCapView;
+        #endregion
+
+        /// <summary>
+        /// Creates a new instance of the Add New Brand View.
+        /// </summary>
+        /// <param name="newCapModel">
+        /// The Add Cap view the user is in.
+        /// </param>
+        public AddNewBrandViewModel(AddNewCapViewModel newCapModel)
+        {
+            addCapView = newCapModel;
+
+            List<string> savedBrandImages = Directory.GetFiles(CapImageFilePaths.CapImageFolderPath).ToList();
+
+            ExistingBrandImages = new BindableCollection<string>(savedBrandImages);
+            if (ExistingBrandImages.Count != 0)
+            {
+                SelectedBrandImage = ExistingBrandImages.First(); 
+            }
+        }
 
         /// <summary>
         /// Browses for a Brand Image when called.
         /// </summary>
         public void BrowseForBrandImage()
         {
-            //TODO - Implement Browse For Brand Image function.
-
-            //TODO - Might move this chunk of code to somewhere else.
             using (OpenFileDialog ofd = new OpenFileDialog())
             {
                 ofd.InitialDirectory = "c:\\";
                 ofd.Filter = "PNG Files (*.png)|*.png";
-                ofd.RestoreDirectory = true;
+                //ofd.RestoreDirectory = true;
                 ofd.Title = "Open Image";
 
                 if (ofd.ShowDialog() == DialogResult.OK)
@@ -85,6 +131,15 @@ namespace BeerCapLog.ViewModels
                     openedStream.Seek(0, SeekOrigin.Begin);
                     openedStream.CopyTo(fileStream);
                     fileStream.Close();
+                    
+                    List<string> populatedExistingImages = ExistingBrandImages.ToList();
+                    populatedExistingImages.Add(ofd.SafeFileName.FullCapImagePath());
+                    populatedExistingImages.Sort();
+
+                    ExistingBrandImages = new BindableCollection<string>(populatedExistingImages);
+                    SelectedBrandImage = ExistingBrandImages.First();
+
+                    MessageBox.Show("File Uploaded, check Existing Image Dropdown.", "Upload Complete", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
         }
@@ -94,19 +149,31 @@ namespace BeerCapLog.ViewModels
         /// </summary>
         public void TryCreateBrand()
         {
-            //TODO - Flesh out TryCreateBrand
             if (ValidateFormDate())
             {
-                MessageBox.Show($"{CreatedBrandName} {SelectedPrimaryColor.ToString()} {SelectedSecondaryColor.ToString()}");
-                //TODO - Create Brand from Form Data
-                BrandModel newBrand = new BrandModel(
-                    5500, //ID
-                    "Brand Name", //Brand Name
-                    "Sally", //FileName
-                    Color.FromArgb(0, 0, 0, 0), //Primary Color
-                    Color.FromArgb(0, 0, 0, 0)); //Secondary Color
+                //MessageBox.Show($"{CreatedBrandName} {SelectedPrimaryColor.ToString()} {SelectedSecondaryColor.ToString()}");
 
-                //TODO - Save all Brands
+                List<BrandModel> savedBrands = UtilityFilePaths.BrandModelsFile.FullUtilitiesPath().LoadFile().ConvertLinesIntoBrands();
+                
+                BrandModel newBrand = new BrandModel(
+                    savedBrands.Count + 1, //ID
+                    CreatedBrandName, //Brand Name
+                    SelectedBrandImage.Remove(0, CapImageFilePaths.CapImageFolderPath.Length), //FileName
+                    SelectedPrimaryColor, //Primary Color
+                    SelectedSecondaryColor); //Secondary Color
+
+                //User can create duplicates
+                savedBrands.Add(newBrand);
+                savedBrands.SaveToBrandsFile();
+
+                if (addCapView.IsActive)
+                {
+                    addCapView.UpdateBrandDropdown();
+
+                    MessageBox.Show("Brand Created.  Please check Brand Dropdown in Add Cap Window.", "Brand Created", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                
+                TryClose();
             }
         }
 
@@ -126,7 +193,11 @@ namespace BeerCapLog.ViewModels
                 output = false;
             }
 
-            //TODO - Validate Brand Image
+            if (SelectedBrandImage == null || SelectedBrandImage == string.Empty)
+            {
+                MessageBox.Show("Brand must have an Image!", "Null Reference Exception", MessageBoxButton.OK, MessageBoxImage.Error);
+                output = false;
+            }
 
             if (SelectedPrimaryColor.A < 255 || SelectedPrimaryColor.A < 255)
             {

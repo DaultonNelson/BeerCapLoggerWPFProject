@@ -14,15 +14,24 @@ namespace BeerCapLog.ViewModels
     public class AddNewCapViewModel : Screen
     {
         #region Variables
-        //TODO - Change Brand Dropdown wire up - TEST
-        /// <summary>
-        /// The Brands that will populate the Brand Dropdown Control.
-        /// </summary>
-        public BindableCollection<BrandModel> Brands { get; set; }
         /// <summary>
         /// All the possible qualities a Beer Cap can be in.
         /// </summary>
         public BindableCollection<Quality> PossibleQualities { get; set; }
+
+        #region Brands
+        private BindableCollection<BrandModel> _brands;
+
+        public BindableCollection<BrandModel> Brands
+        {
+            get { return _brands; }
+            set
+            {
+                _brands = value;
+                NotifyOfPropertyChange(() => Brands);
+            }
+        } 
+        #endregion
 
         #region Selected Brand
         private BrandModel _selectedBrand;
@@ -30,7 +39,10 @@ namespace BeerCapLog.ViewModels
         public BrandModel SelectedBrand
         {
             get { return _selectedBrand; }
-            set { _selectedBrand = value; }
+            set {
+                _selectedBrand = value;
+                NotifyOfPropertyChange(() => SelectedBrand);
+            }
         }
         #endregion
         #region Selected Quality
@@ -91,9 +103,7 @@ namespace BeerCapLog.ViewModels
             user = userAddingCap;
             userCollection = usersBeerCapCollection;
 
-            List<BrandModel> savedBrands = UtilityFilePaths.BrandModelsFile.FullUtilitiesPath().LoadFile().ConvertLinesIntoBrands();
-            
-            Brands = new BindableCollection<BrandModel>(savedBrands);
+            UpdateBrandDropdown();
 
             PossibleQualities = new BindableCollection<Quality>((Quality[])Enum.GetValues(typeof(Quality)));
 
@@ -138,7 +148,20 @@ namespace BeerCapLog.ViewModels
         /// </summary>
         public void OpenAddBrandWindow()
         {
-            manager.ShowWindow(new AddNewBrandViewModel(), null, null);
+            manager.ShowWindow(new AddNewBrandViewModel(this), null, null);
+        }
+
+        /// <summary>
+        /// Updates the Brand Dropdown.
+        /// </summary>
+        public void UpdateBrandDropdown()
+        {
+            List<BrandModel> savedBrands = UtilityFilePaths.BrandModelsFile.FullUtilitiesPath().LoadFile().ConvertLinesIntoBrands();
+            savedBrands.Sort();
+
+            Brands = new BindableCollection<BrandModel>(savedBrands);
+
+            SelectedBrand = Brands.First();
         }
 
         /// <summary>

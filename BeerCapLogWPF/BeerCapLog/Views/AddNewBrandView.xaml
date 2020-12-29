@@ -6,7 +6,7 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:BeerCapLog.Views"
         mc:Ignorable="d" FontSize="24" FontFamily="Yu Gothic Light"
-        Title="ShellView" Height="450" Width="800">
+        Title="ShellView" Height="650" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
@@ -35,10 +35,31 @@
 
                     <!--Add Image Field-->
                     <TextBlock Text="Brand Image" FontFamily="Yu Gothic Medium"/>
-                    <Button MinHeight="75" Width="75" ToolTip="Select Image" Margin="10" Grid.Row="3" Grid.Column="1"
-                HorizontalAlignment="Left" Background="#00000000" x:Name="BrowseForBrandImage">
-                        <Image Source="D:\Side Projects\BottleCapCollection\BeerCapLoggerWPFProject\BeerCapImages\AA_Placeholder.png"/>
-                    </Button>
+                    
+                    <StackPanel Orientation="Horizontal" Margin="10" >
+                        
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="Upload Image"/>
+                            <Button MinHeight="75" Width="75" ToolTip="Upload Image" 
+                                     Background="#00000000" x:Name="BrowseForBrandImage" BorderBrush="#00000000" Foreground="#00000000">
+                                <Image Source="D:\Side Projects\BottleCapCollection\BeerCapLoggerWPFProject\BeerCapImages\AA_Placeholder.png"/>
+                            </Button>
+                        </StackPanel>
+                        
+                        <TextBlock Text="or" VerticalAlignment="Center" Margin="30"/>
+
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="Choose Existing Image"/>
+                            <ComboBox Width="100" Height="75" ToolTip="Choose Existing Image" x:Name="ExistingBrandImages" SelectedItem="{Binding SelectedBrandImage}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Image Width="50" Height="50" Source="{Binding }" VerticalAlignment="Center"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </StackPanel>
+                        
+                    </StackPanel>
 
                     <!--Primary Color Field-->
                     <TextBlock Text="Primary Color" FontFamily="Yu Gothic Medium"/>
@@ -57,6 +78,6 @@
                 MinHeight="50" Width="175" ToolTip="Create Brand"
                 HorizontalAlignment="Right" Margin="10"
                 Content="Create Brand" x:Name="TryCreateBrand"/>
-        
+
     </Grid>
 </Window>

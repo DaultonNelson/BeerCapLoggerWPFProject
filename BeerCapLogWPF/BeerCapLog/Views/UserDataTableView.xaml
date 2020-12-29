@@ -35,36 +35,43 @@
                   IsReadOnly="True" AutoGenerateColumns="False" SelectedItem="{Binding SelectedGridItem}">
             
             <DataGrid.Columns>
+                <!--ID Column-->
                 <DataGridTextColumn Header="ID" Binding="{Binding Path=Id}"/>
 
+                <!--Cap Image Column-->
                 <DataGridTemplateColumn Header="Cap Image">
                     <DataGridTemplateColumn.CellTemplate>
                         <ItemContainerTemplate>
-                            <Image Source="{Binding Path=CapImagePath}" MaxHeight="50" MaxWidth="50"/>
+                            <Image Source="{Binding Path=CapBrand.FullImagePath}" MaxHeight="50" MaxWidth="50"/>
                         </ItemContainerTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
 
-                <DataGridTextColumn Header="Brand Name" Binding="{Binding Path=CapBrandName}"/>
+                <!--Brand Name Column-->
+                <DataGridTextColumn Header="Brand Name" Binding="{Binding Path=CapBrand.BrandName}"/>
 
+                <!--Quality  Column-->
                 <DataGridTextColumn Header="Quality" Binding="{Binding Path=CapQuality}"/>
 
+                <!--Primary Color Column-->
                 <DataGridTemplateColumn Header="Primary Color" MinWidth="150">
                     <DataGridTemplateColumn.CellTemplate>
                         <ItemContainerTemplate>
-                            <Rectangle MaxHeight="50" MaxWidth="150" Fill="{Binding Path=PrimaryColorString}" />
+                            <Rectangle MaxHeight="50" MaxWidth="150" Fill="{Binding Path=CapBrand.PrimaryColorString}" />
                         </ItemContainerTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
 
+                <!--Secondary Color Column-->
                 <DataGridTemplateColumn Header="Secondary Color" MinWidth="150">
                     <DataGridTemplateColumn.CellTemplate>
                         <ItemContainerTemplate>
-                            <Rectangle MaxHeight="50" MaxWidth="150" Fill="{Binding Path=SecondaryColorString}" />
+                            <Rectangle MaxHeight="50" MaxWidth="150" Fill="{Binding Path=CapBrand.SecondaryColorString}" />
                         </ItemContainerTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
 
+                <!--Date Aquired Column-->
                 <DataGridTemplateColumn Header="Date Acquired">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -73,6 +80,7 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
 
+                <!--Under Cap Message Column-->
                 <DataGridTextColumn Header="Under Cap Message" Binding="{Binding Path=UnderCapMessage}"/>
             </DataGrid.Columns>
             

@@ -3,6 +3,7 @@ using BeerCapLog.Models;
 using Caliburn.Micro;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,6 +39,9 @@ namespace BeerCapLog.ViewModels
         private List<UserModel> sortedUsersByBirth = new List<UserModel>();
         #endregion
 
+        /// <summary>
+        /// Creates a new instance of the Shell View.
+        /// </summary>
         public ShellViewModel()
         {
             //sortedUsersByBirth = tsda.GenerateMockUsers(11);
@@ -73,6 +77,16 @@ namespace BeerCapLog.ViewModels
 
             manager.ShowWindow(new UserDataTableViewModel(SelectedUser), null, null);
             TryClose();
+        }
+
+        /// <summary>
+        /// Removes a User from the application.
+        /// </summary>
+        public void RemoveUser()
+        {
+            //TODO - Delete Collection
+            //TODO - Delete The User
+            //TODO - Update Users Dropdown
         }
     }
 }

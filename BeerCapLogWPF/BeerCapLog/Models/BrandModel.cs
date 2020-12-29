@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BeerCapLog.DataUtilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,6 +32,10 @@ namespace BeerCapLog.Models
         /// </summary>
         public Color SecondaryColor { get; set; }
 
+        /// <summary>
+        /// The full path towards the Brand Image.
+        /// </summary>
+        public string FullImagePath { get { return BrandImageFileName.FullCapImagePath(); } }
         /// <summary>
         /// The Primary Color converted to a string.
         /// </summary>

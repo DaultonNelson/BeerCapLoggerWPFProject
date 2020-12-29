@@ -28,25 +28,31 @@
         <ScrollViewer  Grid.Column="1" Grid.Row="2">
             <StackPanel Orientation="Vertical">
 
+                <!--First Name Field-->
                 <TextBlock Text="First Name" FontFamily="Yu Gothic Medium"/>
                 <TextBox Margin="10" x:Name="UserFirstName" ToolTip="Enter First Name"/>
 
+                <!--Last Name Field-->
                 <TextBlock Text="Last Name" FontFamily="Yu Gothic Medium"/>
                 <TextBox Margin="10" x:Name="UserLastName" ToolTip="Enter Last Name"/>
 
+                <!--DOB Field-->
                 <TextBlock Text="Date of Birth" FontFamily="Yu Gothic Medium"/>
                 <DatePicker Margin="10" x:Name="UserDateOfBirth" ToolTip="Enter Birthday"/>
-
-                <Button MinHeight="50" Width="175"
-                    Content="Add User" Margin="10"
-                    x:Name="AddUserWithFormData" ToolTip="Add User"/>
 
             </StackPanel>
         </ScrollViewer>
 
-        <Image Grid.Row="1" Grid.Column="2" Grid.RowSpan="2" x:Name="RightCapImage"
+        <!--User out of Caps Image-->
+        <Image Grid.Row="1" Grid.Column="2" Grid.RowSpan="2" Source="D:\Side Projects\BottleCapCollection\BeerCapLoggerWPFProject\BeerCapImages\AA_UserOutOfCaps.png"
                Margin="20"/>
 
+        <!--Create User button-->
+        <Button MinHeight="50" Width="175" Grid.Row="3" Grid.Column="1"
+                    Content="Add User" Margin="10" HorizontalAlignment="Right"
+                    x:Name="AddUserWithFormData" ToolTip="Add User"/>
+        
+        <!--Go back to Shell button-->
         <Button Grid.Row="3" Grid.Column="1" Width="50" Height="30"
                 Content="←" Margin="10" HorizontalAlignment="Left"
                 ToolTip="Go Back" x:Name="BackToShell"/>

@@ -13,10 +13,6 @@ namespace BeerCapLog.ViewModels
     public class AddUserViewModel : Screen
     {
         #region Variables
-        /// <summary>
-        /// The property for the Beer Cap Image displayed on the right side of the screen.
-        /// </summary>
-        public string RightCapImage { get; set; }
 
         #region UserFirstName
         private string _userFirstName;
@@ -65,10 +61,6 @@ namespace BeerCapLog.ViewModels
             adultDate = adultDate.AddYears(-18);
             //MessageBox.Show(adultDate.ToShortDateString(), "Date", MessageBoxButton.OK);
             usersLoadedFromShell = shellUsers;
-
-            RandomPicking rp = new RandomPicking();
-            
-            RightCapImage = "AA_UserOutOfCaps".FullCapImagePath();
 
             UserDateOfBirth = DateTime.Today;
         }

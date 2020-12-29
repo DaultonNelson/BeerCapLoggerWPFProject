@@ -20,7 +20,7 @@ namespace BeerCapLog.DataUtilities
         }
 
         /// <summary>
-        /// Returngs a full path towards a file in the CapImages area. DO NOT ADD .PNG!
+        /// Returngs a full path towards a file in the CapImages area.
         /// </summary>
         /// <param name="capImageFileName">
         /// The Cap Image file name.

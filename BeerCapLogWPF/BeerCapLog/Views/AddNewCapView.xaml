@@ -6,7 +6,7 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:BeerCapLog.Views"
         mc:Ignorable="d" FontSize="24" FontFamily="Yu Gothic Light"
-        Title="ShellView" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+        Title="ShellView" Height="650" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>
 
         <Grid.RowDefinitions>
@@ -36,7 +36,7 @@
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <Image Width="50" Height="50" Source="{Binding Path=BrandImagePath}"/>
+                                        <Image Width="50" Height="50" Source="{Binding Path=FullImagePath}" Margin="5"/>
                                         <TextBlock Text="{Binding Path=BrandName}"/>
                                     </StackPanel>
                                 </DataTemplate>
