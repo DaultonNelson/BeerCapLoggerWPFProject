@@ -25,19 +25,23 @@
             <ColumnDefinition Width="40"/>
         </Grid.ColumnDefinitions>
 
+        <!--Header-->
         <TextBlock Grid.Row="1" Grid.Column="1" Text="Beer Cap Collector" Margin="20"
                    Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center"
                    FontWeight="Black" FontSize="50" FontFamily="Yu Gothic UI Semibold"/>
 
+        <!--or TextBlock-->
         <TextBlock Grid.Row="2" Grid.Column="2" Margin="20"
                    Text="or" HorizontalAlignment="Center"
                    Grid.RowSpan="2" VerticalAlignment="Center"/>
 
+        <!--Option Labels-->
         <TextBlock Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="10"
                    Text="Pick User" HorizontalAlignment="Center" FontFamily="Yu Gothic Medium"/>
         <TextBlock Grid.Row="2" Grid.Column="3" VerticalAlignment="Center" Margin="10"
                    Text="Create New Profile" HorizontalAlignment="Center" FontFamily="Yu Gothic Medium"/>
 
+        <!--User Dropdown-->
         <ComboBox Grid.Row="3" Grid.Column="1" Margin="10" ToolTip="Pick an Existing User"
                   x:Name="Users" SelectedItem="{Binding SelectedUser}"
                   cal:Message.Attach="[Event SelectionChanged] = [Action UserPickedFromDropdown]">
@@ -52,13 +56,19 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
 
+        <!--Start Here Button-->
         <Button Grid.Row="3" Grid.Column="3" Margin="10" ToolTip="Create a New User Profile"
                 x:Name="StartNewUserHere">
             Start Here
         </Button>
 
+        <!--Credit-->
         <TextBlock Grid.Row="4" Grid.Column="2" Text="by Daulton Nelson"
                    HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+
+        <Button Grid.Row="4" Grid.Column="3" Margin="10"
+                HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                Height="35" Width="100" Content="Edit Saved Images"/>
     </Grid>
 
 </Window>

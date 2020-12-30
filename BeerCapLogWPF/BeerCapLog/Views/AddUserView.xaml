@@ -22,7 +22,7 @@
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Add User" FontWeight="Black" FontSize="50" FontFamily="Yu Gothic UI Semibold"
+        <TextBlock Text="Add User" FontWeight="Black" FontSize="40" FontFamily="Yu Gothic UI Semibold"
                    Grid.Column="1" Grid.Row="1"/>
 
         <ScrollViewer  Grid.Column="1" Grid.Row="2">
