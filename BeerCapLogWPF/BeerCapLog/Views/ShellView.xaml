@@ -44,7 +44,6 @@
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <Button Width="35" Height="35" Margin="5" Content="x" VerticalAlignment="Center" ToolTip="Remove User"/>
                         <TextBlock Text="{Binding FullName}"/>
                         <Rectangle Width="20"/>
                         <TextBlock Text="{Binding TimeLastLoggedIn}" FontSize="16" Foreground="Gray"/>

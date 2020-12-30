@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BeerCapLog.Models
 {
-    public class UserModel : IComparable<UserModel>
+    public class UserModel : IComparable<UserModel>, IEquatable<UserModel>
     {
         #region Properties
         /// <summary>
@@ -29,10 +29,6 @@ namespace BeerCapLog.Models
         /// The time this User last logged in.
         /// </summary>
         public DateTime TimeLastLoggedIn { get; set; }
-        /// <summary>
-        /// The date this User joined the Program.
-        /// </summary>
-        public DateTime DateJoined { get; set; }
 
         /// <summary>
         /// The full name of this User.
@@ -69,26 +65,6 @@ namespace BeerCapLog.Models
             FirstName = _firstName;
             LastName = _lastName;
             DateOfBirth = _birthday;
-            DateJoined = DateTime.Now;
-            TimeLastLoggedIn = _lastLogin;
-        }
-
-        /// <summary>
-        /// Creates a new User.
-        /// </summary>
-        /// <param name="_id">The ID of the User</param>
-        /// <param name="_firstName">The First Name of the User</param>
-        /// <param name="_lastName">The Last Name of the User</param>
-        /// <param name="_birthday">The Birthday of the User</param>
-        /// <param name="_lastLogin">The time the User last logged in</param>
-        /// <param name="_joined">The date the User joined this app</param>
-        public UserModel(int _id, string _firstName, string _lastName, DateTime _birthday, DateTime _lastLogin, DateTime _joined)
-        {
-            Id = _id;
-            FirstName = _firstName;
-            LastName = _lastName;
-            DateOfBirth = _birthday;
-            DateJoined = _joined;
             TimeLastLoggedIn = _lastLogin;
         }
         
@@ -98,6 +74,19 @@ namespace BeerCapLog.Models
             int output = 5;
 
             output = TimeLastLoggedIn.CompareTo(other.TimeLastLoggedIn);
+
+            return output;
+        }
+
+        //Seeing if one User is equal to another
+        public bool Equals(UserModel other)
+        {
+            bool output = true;
+
+            if (other.Id != Id || other.FirstName != FirstName || other.LastName != LastName || other.DateOfBirth != DateOfBirth)
+            {
+                output = false;
+            }
 
             return output;
         }

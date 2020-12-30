@@ -20,20 +20,29 @@
             <ColumnDefinition Width="20"/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock x:Name="HeaderText" FontWeight="Black" FontSize="50" FontFamily="Yu Gothic UI Semibold"
+        <!--Header-->
+        <TextBlock x:Name="HeaderText" FontWeight="Black" FontSize="40" FontFamily="Yu Gothic UI Semibold"
                    Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2"/>
 
-        <WrapPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="2" Margin="10">
+        <!--<WrapPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="2" Margin="10">
 
             <Button Width="30" Height="30" Content="+" ToolTip="Add New Cap" x:Name="AddNewCapForUser"/>
             <Button Width="30" Height="30" Content="-" ToolTip="Remove Selected Cap" x:Name="RemoveSelectedCap"/>
 
-        </WrapPanel>
-        
+        </WrapPanel>-->
+
+        <ToolBarTray Grid.Column="1" Grid.Row="2" Margin="10">
+            <ToolBar>
+                <Button Width="40" Content="+" ToolTip="Add New Cap" x:Name="AddNewCapForUser" ToolBar.OverflowMode="AsNeeded"/>
+                <Button Width="40" Content="-" ToolTip="Remove Selected Cap" x:Name="RemoveSelectedCap" ToolBar.OverflowMode="AsNeeded"/>
+                <Button Width="40" Content="x" ToolTip="Delete User Profile" x:Name="RemoveUser" ToolBar.OverflowMode="AsNeeded"/>
+            </ToolBar>
+        </ToolBarTray>
+
         <DataGrid AlternatingRowBackground="LightGray" Grid.Row="3" Grid.Column="1"
                   Margin="10" x:Name="CollectedCaps" CanUserAddRows="False" CanUserDeleteRows="False"
                   IsReadOnly="True" AutoGenerateColumns="False" SelectedItem="{Binding SelectedGridItem}">
-            
+
             <DataGrid.Columns>
                 <!--ID Column-->
                 <DataGridTextColumn Header="ID" Binding="{Binding Path=Id}"/>
@@ -83,7 +92,7 @@
                 <!--Under Cap Message Column-->
                 <DataGridTextColumn Header="Under Cap Message" Binding="{Binding Path=UnderCapMessage}"/>
             </DataGrid.Columns>
-            
+
         </DataGrid>
     </Grid>
 </Window>

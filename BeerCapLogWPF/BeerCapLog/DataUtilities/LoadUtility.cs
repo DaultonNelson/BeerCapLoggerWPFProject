@@ -56,8 +56,7 @@ namespace BeerCapLog.DataUtilities
                     props[1], //First Name
                     props[2], //Last Name
                     DateTime.Parse(props[3]), //Date of Birth
-                    DateTime.Parse(props[4]), //Time Last Logged in
-                    DateTime.Parse(props[5])  //Date Joined
+                    DateTime.Parse(props[4]) //Time Last Logged in
                 );
 
                 userFromString.GetSavedBeerCapCollection();

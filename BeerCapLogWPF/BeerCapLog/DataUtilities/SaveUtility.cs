@@ -23,7 +23,7 @@ namespace BeerCapLog.DataUtilities
 
             foreach (UserModel user in userModels)
             {
-                lines.Add($"{user.Id},{user.FirstName},{user.LastName},{user.DateOfBirth.ToShortDateString()},{user.TimeLastLoggedIn},{user.DateJoined.ToShortDateString()}");
+                lines.Add($"{user.Id},{user.FirstName},{user.LastName},{user.DateOfBirth.ToShortDateString()},{user.TimeLastLoggedIn}");
             }
 
             File.WriteAllLines(UtilityFilePaths.UserModelsFile.FullUtilitiesPath(), lines);

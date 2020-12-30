@@ -53,7 +53,7 @@ namespace BeerCapLog.ViewModels
         {
             dataTableUser = userToLoadFrom;
 
-            HeaderText = $"{dataTableUser.FirstName} {dataTableUser.LastName}'s Caps";
+            HeaderText = $"{dataTableUser.FullName}'s Caps";
             
             //MockBeerCapProcessor mbcp = new MockBeerCapProcessor();
 
@@ -90,6 +90,23 @@ namespace BeerCapLog.ViewModels
                 CollectedCaps.ToList().SaveCapCollectionToFile(dataTableUser);
 
                 MessageBox.Show("Beer Cap Removed", "Removed", MessageBoxButton.OK);
+            }
+        }
+
+        /// <summary>
+        /// Removes the User from the application.
+        /// </summary>
+        public void RemoveUser()
+        {
+            if (MessageBox.Show($"Are you sure you want to delete {dataTableUser.FullName}'s Profile?", "Remove User?", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No) == MessageBoxResult.Yes)
+            {
+                if (dataTableUser.DeleteUserProfile())
+                {
+                    MessageBox.Show("User has been removed from application.", "User Removed", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    manager.ShowWindow(new ShellViewModel(), null, null);
+                    TryClose(); 
+                }
             }
         }
 

@@ -78,15 +78,5 @@ namespace BeerCapLog.ViewModels
             manager.ShowWindow(new UserDataTableViewModel(SelectedUser), null, null);
             TryClose();
         }
-
-        /// <summary>
-        /// Removes a User from the application.
-        /// </summary>
-        public void RemoveUser()
-        {
-            //TODO - Delete Collection
-            //TODO - Delete The User
-            //TODO - Update Users Dropdown
-        }
     }
 }
