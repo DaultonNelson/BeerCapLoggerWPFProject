@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BeerCapLog.Views"
         xmlns:cal="http://www.caliburnproject.org"
-        mc:Ignorable="d" FontSize="24" FontFamily="Yu Gothic Light"
+        mc:Ignorable="d" FontSize="24" FontFamily="Baskerville Old Face" Background="PapayaWhip"
         Title="ShellView" Height="450" Width="800" WindowStartupLocation="CenterScreen">
 
     <Grid>
@@ -26,9 +26,11 @@
         </Grid.ColumnDefinitions>
 
         <!--Header-->
-        <TextBlock Grid.Row="1" Grid.Column="1" Text="Beer Cap Collector" Margin="20"
+        <!--<TextBlock Grid.Row="1" Grid.Column="1" Text="Beer Cap Collector" Margin="20"
                    Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center"
-                   FontWeight="Black" FontSize="50" FontFamily="Yu Gothic UI Semibold"/>
+                   FontWeight="Black" FontSize="50" FontFamily="Yu Gothic UI Semibold"/>-->
+        <Image Grid.Row="1" Grid.Column="1" Source="D:\Side Projects\BottleCapCollection\BeerCapLoggerWPFProject\BeerCapImages\AA_AppLogo.png"
+               Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
         <!--or TextBlock-->
         <TextBlock Grid.Row="2" Grid.Column="2" Margin="20"
@@ -37,14 +39,20 @@
 
         <!--Option Labels-->
         <TextBlock Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="10"
-                   Text="Pick User" HorizontalAlignment="Center" FontFamily="Yu Gothic Medium"/>
+                   Text="Pick User" HorizontalAlignment="Center"/>
         <TextBlock Grid.Row="2" Grid.Column="3" VerticalAlignment="Center" Margin="10"
-                   Text="Create New Profile" HorizontalAlignment="Center" FontFamily="Yu Gothic Medium"/>
+                   Text="Create New Profile" HorizontalAlignment="Center"/>
 
         <!--User Dropdown-->
         <ComboBox Grid.Row="3" Grid.Column="1" Margin="10" ToolTip="Pick an Existing User"
                   x:Name="Users" SelectedItem="{Binding SelectedUser}"
                   cal:Message.Attach="[Event SelectionChanged] = [Action UserPickedFromDropdown]">
+            <ComboBox.Background>
+                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                    <GradientStop Color="#FFF0F0F0" Offset="0"/>
+                    <GradientStop Color="Red" Offset="1"/>
+                </LinearGradientBrush>
+            </ComboBox.Background>
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -65,10 +73,6 @@
         <!--Credit-->
         <TextBlock Grid.Row="4" Grid.Column="2" Text="by Daulton Nelson"
                    HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-
-        <Button Grid.Row="4" Grid.Column="3" Margin="10"
-                HorizontalAlignment="Right" VerticalAlignment="Bottom"
-                Height="35" Width="100" Content="Edit Saved Images"/>
     </Grid>
 
 </Window>
