@@ -12,6 +12,7 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -31,14 +32,29 @@
 
         </WrapPanel>-->
 
+        <!--Toolbar-->
         <ToolBarTray Grid.Column="1" Grid.Row="2" Margin="10">
             <ToolBar>
-                <Button Width="40" Height="40" Content="+" ToolTip="Add New Cap" x:Name="AddNewCapForUser" ToolBar.OverflowMode="AsNeeded"/>
-                <Button Width="40" Height="40" Content="-" ToolTip="Remove Selected Cap" x:Name="RemoveSelectedCap" ToolBar.OverflowMode="AsNeeded"/>
-                <Button Width="40" Height="40" Content="x" ToolTip="Delete User Profile" x:Name="RemoveUser" ToolBar.OverflowMode="AsNeeded"/>
+                
+                <Button Width="40" Height="40" ToolTip="Add New Cap" x:Name="AddNewCapForUser" ToolBar.OverflowMode="AsNeeded"
+                         BorderBrush="#00000000" Foreground="#00000000">
+                    <Image Source="D:\Side Projects\BottleCapCollection\BeerCapLoggerWPFProject\BeerCapImages\ToolbarButton_AddCap.png"/>
+                </Button>
+                
+                <Button Width="40" Height="40" ToolTip="Remove Selected Cap" x:Name="RemoveSelectedCap" ToolBar.OverflowMode="AsNeeded"
+                        BorderBrush="#00000000" Foreground="#00000000">
+                    <Image Source="D:\Side Projects\BottleCapCollection\BeerCapLoggerWPFProject\BeerCapImages\ToolbarButton_RemoveCap.png"/>
+                </Button>
+
+                <Button Width="40" Height="40" ToolTip="Delete User Profile" x:Name="RemoveUser" ToolBar.OverflowMode="AsNeeded"
+                        BorderBrush="#00000000" Foreground="#00000000">
+                    <Image Source="D:\Side Projects\BottleCapCollection\BeerCapLoggerWPFProject\BeerCapImages\ToolbarButton_RemoveUser.png"/>
+                </Button>
+                
             </ToolBar>
         </ToolBarTray>
 
+        <!--User Cap Collection Grid-->
         <DataGrid AlternatingRowBackground="LightGray" Grid.Row="3" Grid.Column="1"
                   Margin="10" x:Name="CollectedCaps" CanUserAddRows="False" CanUserDeleteRows="False"
                   IsReadOnly="True" AutoGenerateColumns="False" SelectedItem="{Binding SelectedGridItem}">
@@ -48,7 +64,7 @@
                 <DataGridTextColumn Header="ID" Binding="{Binding Path=Id}"/>
 
                 <!--Cap Image Column-->
-                <DataGridTemplateColumn Header="Cap Image">
+                <DataGridTemplateColumn Header="Cap Image" SortMemberPath="CapBrand.BrandImageFileName">
                     <DataGridTemplateColumn.CellTemplate>
                         <ItemContainerTemplate>
                             <Image Source="{Binding Path=CapBrand.FullImagePath}" MaxHeight="50" MaxWidth="50"/>
@@ -63,7 +79,7 @@
                 <DataGridTextColumn Header="Quality" Binding="{Binding Path=CapQuality}"/>
 
                 <!--Primary Color Column-->
-                <DataGridTemplateColumn Header="Primary Color" MinWidth="150">
+                <DataGridTemplateColumn Header="Primary Color" MaxWidth="150" SortMemberPath="CapBrand.PrimaryColorString">
                     <DataGridTemplateColumn.CellTemplate>
                         <ItemContainerTemplate>
                             <Rectangle MaxHeight="50" MaxWidth="150" Fill="{Binding Path=CapBrand.PrimaryColorString}" />
@@ -72,7 +88,7 @@
                 </DataGridTemplateColumn>
 
                 <!--Secondary Color Column-->
-                <DataGridTemplateColumn Header="Secondary Color" MinWidth="150">
+                <DataGridTemplateColumn Header="Secondary Color" MaxWidth="150" SortMemberPath="CapBrand.SecondaryColorString">
                     <DataGridTemplateColumn.CellTemplate>
                         <ItemContainerTemplate>
                             <Rectangle MaxHeight="50" MaxWidth="150" Fill="{Binding Path=CapBrand.SecondaryColorString}" />
@@ -81,7 +97,7 @@
                 </DataGridTemplateColumn>
 
                 <!--Date Aquired Column-->
-                <DataGridTemplateColumn Header="Date Acquired">
+                <DataGridTemplateColumn Header="Date Acquired" SortMemberPath="DateAquired">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Path=DateAquired, StringFormat=d}"/>
@@ -94,5 +110,6 @@
             </DataGrid.Columns>
 
         </DataGrid>
+
     </Grid>
 </Window>

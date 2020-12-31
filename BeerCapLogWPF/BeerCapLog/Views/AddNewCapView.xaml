@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:BeerCapLog.Views"
-        mc:Ignorable="d" FontSize="24" FontFamily="Yu Gothic Light"
+        mc:Ignorable="d" FontSize="24" FontFamily="Baskerville Old Face" Background="PapayaWhip"
         Title="ShellView" Height="650" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>
 
@@ -22,7 +22,7 @@
             <ColumnDefinition Width="20"/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock Text="Add New Cap" FontWeight="Black" FontSize="40" FontFamily="Yu Gothic UI Semibold"
+        <TextBlock Text="Add New Cap" FontWeight="Black" FontSize="40"
                    Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2"/>
 
         <Border Grid.Column="1" Grid.Row="2" Margin="20"
@@ -30,14 +30,14 @@
             <ScrollViewer>
                 <StackPanel Orientation="Vertical">
                     <!--Brand Dropdown-->
-                    <TextBlock Text="Brand" FontFamily="Yu Gothic Medium"/>
+                    <TextBlock Text="Brand"/>
                     <StackPanel Margin="10" Orientation="Horizontal">
                         <ComboBox x:Name="Brands" SelectedItem="{Binding SelectedBrand}" ToolTip="Select Brand" Width="600">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
                                         <Image Width="50" Height="50" Source="{Binding Path=FullImagePath}" Margin="5"/>
-                                        <TextBlock Text="{Binding Path=BrandName}"/>
+                                        <TextBlock Text="{Binding Path=BrandName}" VerticalAlignment="Center"/>
                                     </StackPanel>
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
@@ -46,15 +46,15 @@
                     </StackPanel>
 
                     <!--Qualities Dropdown-->
-                    <TextBlock Text="Quality" FontFamily="Yu Gothic Medium"/>
+                    <TextBlock Text="Quality"/>
                     <ComboBox Margin="10" x:Name="PossibleQualities" SelectedItem="{Binding SelectedQuality}" ToolTip="Select Quality"/>
 
                     <!--Date Acquired Field-->
-                    <TextBlock Text="Date Acquired" FontFamily="Yu Gothic Medium"/>
+                    <TextBlock Text="Date Acquired"/>
                     <DatePicker Margin="10" x:Name="SelectedAquireDate" ToolTip="Select Beer Cap Acquire Date"/>
 
                     <!--Under Cap Message Field-->
-                    <TextBlock Text="Under Cap Message" FontFamily="Yu Gothic Medium"/>
+                    <TextBlock Text="Under Cap Message"/>
                     <TextBox Margin="10" x:Name="CreatedUnderMessage" ToolTip="Enter Mesage Under Cap"/>
                 </StackPanel>
             </ScrollViewer>
@@ -64,12 +64,14 @@
         <Button Grid.Column="1" Grid.Row="3"
                 MinHeight="50" Width="175" ToolTip="Create Cap"
                 HorizontalAlignment="Right" Margin="10"
-                Content="Create Cap" x:Name="TryCreateCap"/>
+                Content="Create Cap" x:Name="TryCreateCap"
+                Background="#FF573721" Foreground="PapayaWhip"/>
 
         <!--Go Back Button-->
         <Button Grid.Row="3" Grid.Column="1" Width="50" Height="30"
                 Content="←" Margin="10" HorizontalAlignment="Left"
-                ToolTip="Go Back" x:Name="BackToDataTable"/>
+                ToolTip="Go Back" x:Name="BackToDataTable"
+                Background="#FF573721" Foreground="PapayaWhip"/>
 
     </Grid>
 

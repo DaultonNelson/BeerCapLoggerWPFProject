@@ -4,8 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-        xmlns:local="clr-namespace:BeerCapLog.Views"
-        mc:Ignorable="d" FontSize="24" FontFamily="Yu Gothic Light"
+        xmlns:local="clr-namespace:BeerCapLog.Views" 
+        mc:Ignorable="d" FontSize="24" FontFamily="Baskerville Old Face" Background="PapayaWhip"
         Title="ShellView" Height="650" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -21,7 +21,7 @@
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Add New Brand" FontWeight="Black" FontSize="40" FontFamily="Yu Gothic UI Semibold"
+        <TextBlock Text="Add New Brand" FontWeight="Black" FontSize="40"
                    Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2"/>
 
         <Border Grid.Column="1" Grid.Row="2" Margin="20"
@@ -30,13 +30,13 @@
                 <StackPanel Orientation="Vertical">
 
                     <!--Brand Name Field-->
-                    <TextBlock Text="Brand Name" FontFamily="Yu Gothic Medium"/>
+                    <TextBlock Text="Brand Name"/>
                     <TextBox Margin="10" x:Name="CreatedBrandName" ToolTip="Enter Brand Name"/>
 
                     <!--Add Image Field-->
-                    <TextBlock Text="Brand Image" FontFamily="Yu Gothic Medium"/>
+                    <TextBlock Text="Brand Image"/>
                     
-                    <StackPanel Orientation="Horizontal" Margin="10" >
+                    <StackPanel Orientation="Horizontal" Margin="20" >
                         
                         <StackPanel Orientation="Vertical">
                             <TextBlock Text="Upload Image"/>
@@ -62,11 +62,11 @@
                     </StackPanel>
 
                     <!--Primary Color Field-->
-                    <TextBlock Text="Primary Color" FontFamily="Yu Gothic Medium"/>
+                    <TextBlock Text="Primary Color"/>
                     <xctk:ColorPicker Margin="10" SelectedColor="{Binding SelectedPrimaryColor}" ToolTip="Select Brand Primary Color"/>
 
                     <!--Secondary Color Field-->
-                    <TextBlock Text="Secondary Color" FontFamily="Yu Gothic Medium"/>
+                    <TextBlock Text="Secondary Color"/>
                     <xctk:ColorPicker Margin="10" SelectedColor="{Binding SelectedSecondaryColor}" ToolTip="Select Brand Secondary Color"/>
 
                 </StackPanel>
@@ -77,7 +77,8 @@
         <Button Grid.Column="1" Grid.Row="3"
                 MinHeight="50" Width="175" ToolTip="Create Brand"
                 HorizontalAlignment="Right" Margin="10"
-                Content="Create Brand" x:Name="TryCreateBrand"/>
+                Content="Create Brand" x:Name="TryCreateBrand"
+                Background="#FF573721" Foreground="PapayaWhip"/>
 
     </Grid>
 </Window>

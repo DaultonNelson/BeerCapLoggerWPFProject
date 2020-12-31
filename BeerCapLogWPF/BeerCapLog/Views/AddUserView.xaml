@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BeerCapLog.Views"
-        mc:Ignorable="d" FontSize="24" FontFamily="Yu Gothic Light"
+        mc:Ignorable="d" FontSize="24" FontFamily="Baskerville Old Face" Background="PapayaWhip"
         Title="ShellView" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>
 
@@ -22,22 +22,23 @@
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Add User" FontWeight="Black" FontSize="40" FontFamily="Yu Gothic UI Semibold"
+        <!--Header-->
+        <TextBlock Text="Add User" FontWeight="Black" FontSize="40"
                    Grid.Column="1" Grid.Row="1"/>
 
         <ScrollViewer  Grid.Column="1" Grid.Row="2">
             <StackPanel Orientation="Vertical">
 
                 <!--First Name Field-->
-                <TextBlock Text="First Name" FontFamily="Yu Gothic Medium"/>
+                <TextBlock Text="First Name"/>
                 <TextBox Margin="10" x:Name="UserFirstName" ToolTip="Enter First Name"/>
 
                 <!--Last Name Field-->
-                <TextBlock Text="Last Name" FontFamily="Yu Gothic Medium"/>
+                <TextBlock Text="Last Name"/>
                 <TextBox Margin="10" x:Name="UserLastName" ToolTip="Enter Last Name"/>
 
                 <!--DOB Field-->
-                <TextBlock Text="Date of Birth" FontFamily="Yu Gothic Medium"/>
+                <TextBlock Text="Date of Birth"/>
                 <DatePicker Margin="10" x:Name="UserDateOfBirth" ToolTip="Enter Birthday"/>
 
             </StackPanel>
@@ -50,12 +51,13 @@
         <!--Create User button-->
         <Button MinHeight="50" Width="175" Grid.Row="3" Grid.Column="1"
                     Content="Add User" Margin="10" HorizontalAlignment="Right"
-                    x:Name="AddUserWithFormData" ToolTip="Add User"/>
+                    x:Name="AddUserWithFormData" ToolTip="Add User"
+                    Background="#FF573721" Foreground="PapayaWhip"/>
         
         <!--Go back to Shell button-->
         <Button Grid.Row="3" Grid.Column="1" Width="50" Height="30"
                 Content="←" Margin="10" HorizontalAlignment="Left"
-                ToolTip="Go Back" x:Name="BackToShell"/>
+                ToolTip="Go Back" x:Name="BackToShell" Background="#FF573721" Foreground="PapayaWhip"/>
 
     </Grid>
 
